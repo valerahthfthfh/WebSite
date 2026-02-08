@@ -1,0 +1,111 @@
+/* InfiniteSlider.css */
+:root {
+  --fontSize: 32px;
+  --animation-duration: 20s;
+}
+
+.slider {
+  width: 100%;
+  background-color: #2F3542;
+  overflow: hidden;
+  position: relative;
+  padding: 20px 0;
+}
+
+.slider::before,
+.slider::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  z-index: 2;
+}
+
+.slider::before {
+  left: 0;
+  background: linear-gradient(to right, #2F3542 0%, transparent 100%);
+}
+
+.slider::after {
+  right: 0;
+  background: linear-gradient(to left, #2F3542 0%, transparent 100%);
+}
+
+.slider .list {
+  display: flex;
+  width: max-content;
+  animation: scroll var(--animation-duration) linear infinite;
+}
+
+.slider .list .item {
+  flex-shrink: 0;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+}
+
+.slider .list .item p {
+  color: white;
+  font-size: var(--fontSize);
+  font-weight: 600;
+  white-space: nowrap;
+  margin: 0;
+  position: relative;
+  padding-right: 40px;
+}
+
+.slider .list .item p::after {
+  content: '•';
+  position: absolute;
+  right: 10px;
+  color: #f00e06;
+  font-size: 24px;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Пауза при наведении */
+.slider:hover .list {
+  animation-play-state: paused;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  :root {
+    --fontSize: 24px;
+    --animation-duration: 15s;
+  }
+  
+  .slider .list .item {
+    padding: 0 25px;
+  }
+  
+  .slider .list .item p::after {
+    font-size: 18px;
+    right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --fontSize: 20px;
+    --animation-duration: 12s;
+  }
+  
+  .slider .list .item {
+    padding: 0 15px;
+  }
+  
+  .slider::before,
+  .slider::after {
+    width: 50px;
+  }
+}
