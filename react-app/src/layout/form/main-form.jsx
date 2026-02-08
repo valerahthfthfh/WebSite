@@ -84,16 +84,13 @@ function MainForm() {
       const dateNow = new Date().toLocaleDateString('ru-RU');
       const appId = new Date().getTime();
       
-      const message = `🚨 <b>НОВАЯ ЗАЯВКА С САЙТА!</b>
-
-👤 <b>ФИО:</b> ${name}
-📞 <b>Телефон:</b> ${phone}
-💬 <b>Комментарий:</b> ${comment || 'Не указан'}
-📅 <b>Дата:</b> ${dateNow}
-⏰ <b>Время:</b> ${timeNow}
-🌐 <b>Источник:</b> Веб-сайт
-
-🆔 <b>ID заявки:</b> <code>${appId}</code>`;
+      const message = `🔥 <b>НОВАЯ ЗАЯВКА С САЙТА 🔥 </b>
+<b></b>
+<b>ФИО:</b> ${name}
+<b>Телефон:</b> ${phone}
+<b>Комментарий:</b> ${comment || 'Не указан'}
+<b>Дата/Время:</b> ${dateNow}, ${timeNow}
+<b>ID заявки:</b> <code>${appId}</code>`;
       
       // Отправляем каждому админу
       for (const adminId of admins) {
