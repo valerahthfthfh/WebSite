@@ -7,6 +7,7 @@ import InfiniteSlider from './layout/infiniteSlider/InfiniteSlider'
 import Why from './layout/why/Why'
 import Service from './layout/servic/Service'
 import TimeBlock from './layout/timeBlock/TimeBlock'
+import Data from './layout/сardSlider/Data'
 function App() {
   return (
     <div className="App">
@@ -28,6 +29,9 @@ function App() {
 
       <Service>
       </Service>
+
+      <Data>
+      </Data>
 
       <MapKit>
       </MapKit>

@@ -1,0 +1,130 @@
+/* layout/сardSlider/Data.css */
+.Data {
+  min-height: 1000px;
+  display: flex;
+  flex-direction: column;
+  background: #2F3542;
+  width: 100%;
+  position: relative;
+}
+
+.Data::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  opacity: 0.05;
+  z-index: 0;
+}
+
+.Data-header {
+  text-align: center;
+  padding: 5rem 1rem 3rem;
+  background: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.Data-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.Data-footer {
+  text-align: center;
+  padding: 2rem;
+  color: #718096;
+  font-size: 1rem;
+  position: relative;
+  z-index: 1;
+  font-weight: 500;
+}
+
+/* Декоративные элементы для заголовка */
+.Data-header h1::after {
+  content: '';
+  display: block;
+  width: 120px;
+  height: 5px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin: 2rem auto;
+  border-radius: 3px;
+}
+
+/* Эффект для отзывов */
+.Data-main::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0) 70%);
+  z-index: 0;
+}
+
+/* Адаптивность заголовка */
+@media (max-width: 768px) {
+  .Data-header {
+    padding: 4rem 1rem 2rem;
+  }
+  
+  .Data-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .Data-header p {
+    font-size: 1.1rem;
+    padding: 0 1rem;
+  }
+  
+  .Data-header h1::after {
+    width: 80px;
+    margin: 1.5rem auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .Data-header {
+    padding: 3rem 1rem 2rem;
+  }
+  
+  .Data-header h1 {
+    font-size: 2rem;
+  }
+  
+  .Data-footer {
+    padding: 1.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2F3542;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:#FD4943; ;
+}
