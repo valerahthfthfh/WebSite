@@ -3,7 +3,7 @@
   min-height: 1000px;
   display: flex;
   flex-direction: column;
-  background: #2F3542;
+  background: linear-gradient(135deg, #2F3542 0%, #1a1d26 100%);
   width: 100%;
   position: relative;
 }

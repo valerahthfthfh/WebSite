@@ -5,9 +5,9 @@ function Service() {
     <div class="container">
         <main class="main-content">
             <section class="hero">
-                <div class="hero-text">
-                    <h1 class="hero-logo">КотлOFF service</h1>
-                    <h2 class="hero-title">Почему стоит выбрать нас?</h2>
+                <div className="hero-text">
+                    <h1 className="hero-logo">Котл<span>OFF</span> service</h1>
+                    <h2 className="hero-title">Почему стоит выбрать нас?</h2>
                 </div>
 
                 <div class="hero-button">
@@ -15,7 +15,8 @@ function Service() {
                 <div class="space">
                     
                 </div>
-                    <a href="#" class="cta-button">Узнать подробнее</a>
+                    <a href="#" class="cta-button">Отправить заявку</a>
+                    <div></div>
                 </div>
                 
                 <div class="features">
