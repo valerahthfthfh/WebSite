@@ -11,7 +11,6 @@ import Data from './layout/сardSlider/Data'
 
 function App() {
   useEffect(() => {
-    // Замените 'XXXXXXXX' на ваш реальный ID виджета
     var widget_id = 'NhrSDE7n5m';
     var d = document;
     var w = window;
