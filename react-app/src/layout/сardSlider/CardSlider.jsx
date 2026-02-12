@@ -104,6 +104,7 @@ const CardSlider = ({ testimonials }) => {
                 className={`card ${position}`}
                 data-index={index}
               >
+
                 <div className="card-header">
                   <div className="quote-icon">
                     <Quote size={28} />

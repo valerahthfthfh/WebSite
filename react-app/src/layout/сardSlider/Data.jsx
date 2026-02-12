@@ -79,7 +79,14 @@ function Data() {
 
   return (
     <div className="Data">
+
+      <div className="hero-text-data">
+        <h1 className="hero-logo-data">Котл<span>OFF</span> service</h1>
+        <h2 className="hero-title-data">Отзывы от наших <span>клиентов</span></h2>
+      </div>
+
       <div className="Data-main">
+      
         <CardSlider testimonials={testimonials} />
       </div>
     </div>

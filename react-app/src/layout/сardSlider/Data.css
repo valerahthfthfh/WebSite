@@ -1,9 +1,9 @@
-/* layout/сardSlider/Data.css */
+/* layout/cardSlider/Data.css */
 .Data {
   min-height: 1000px;
   display: flex;
   flex-direction: column;
-  background: #2F3542;
+  background: linear-gradient(135deg, #2F3542 0%, #1a1d26 100%);
   width: 100%;
   position: relative;
 }
@@ -19,12 +19,44 @@
   z-index: 0;
 }
 
-.Data-header {
-  text-align: center;
-  padding: 5rem 1rem 3rem;
-  background: transparent;
+.hero-text-data {
+  min-width: 1450px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  margin-top: 80px;
+}
+
+.hero-logo-data {
+  margin: 0;
+  color: white;
+}
+
+.hero-logo-data span {
+  color: #FD4943;
+}
+
+.hero-title-data {
+  color: white;
+  font-size: 50px;
+  letter-spacing: 1px;
+  opacity: 0.95;
+  font-weight: 300;
+}
+
+.hero-title-data span {
+  color: #FD4943;
   position: relative;
-  z-index: 1;
+}
+
+.hero-title-data span::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 2px;
 }
 
 .Data-main {
@@ -48,7 +80,6 @@
   font-weight: 500;
 }
 
-/* Декоративные элементы для заголовка */
 .Data-header h1::after {
   content: '';
   display: block;
@@ -59,7 +90,6 @@
   border-radius: 3px;
 }
 
-/* Эффект для отзывов */
 .Data-main::before {
   content: '';
   position: absolute;
@@ -72,39 +102,169 @@
   z-index: 0;
 }
 
-/* Адаптивность заголовка */
+/* ============ ИДЕАЛЬНАЯ АДАПТАЦИЯ ============ */
+
+/* Планшеты и небольшие ноутбуки */
+@media (max-width: 1200px) {
+  .hero-text-data {
+    min-width: 0;
+    width: 90%;
+    margin-top: 60px;
+  }
+  .hero-title-data {
+    font-size: 44px;
+  }
+  .hero-logo-data {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-text-data {
+    margin-top: 50px;
+  }
+  .hero-logo-data {
+    font-size: 38px;
+  }
+  .hero-title-data {
+    font-size: 36px;
+  }
+  .Data {
+    min-height: 900px;
+  }
+}
+
+/* Планшеты вертикальные */
 @media (max-width: 768px) {
+  .hero-text-data {
+    margin-top: 40px;
+    text-align: center;
+    width: 95%;
+  }
+  .hero-logo-data {
+    font-size: 34px;
+    white-space: normal;
+  }
+  .hero-title-data {
+    font-size: 30px;
+    white-space: normal;
+    line-height: 1.3;
+  }
+  .hero-title-data span::after {
+    bottom: -3px;
+    height: 2px;
+  }
   .Data-header {
-    padding: 4rem 1rem 2rem;
+    padding: 3rem 1rem 2rem;
   }
-  
   .Data-header h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
-  
   .Data-header p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     padding: 0 1rem;
   }
-  
   .Data-header h1::after {
     width: 80px;
     margin: 1.5rem auto;
   }
+  .Data-footer {
+    padding: 1.8rem 1rem;
+    font-size: 0.95rem;
+  }
+  .Data {
+    min-height: 800px;
+  }
 }
 
-@media (max-width: 480px) {
-  .Data-header {
-    padding: 3rem 1rem 2rem;
+/* Крупные телефоны (горизонталь) */
+@media (max-width: 600px) {
+  .hero-text-data {
+    margin-top: 35px;
   }
-  
+  .hero-logo-data {
+    font-size: 28px;
+  }
+  .hero-title-data {
+    font-size: 24px;
+  }
   .Data-header h1 {
     font-size: 2rem;
   }
-  
-  .Data-footer {
-    padding: 1.5rem 1rem;
+  .Data-header p {
+    font-size: 0.95rem;
+  }
+}
+
+/* Телефоны (до 480px) */
+@media (max-width: 480px) {
+  .hero-text-data {
+    margin-top: 30px;
+  }
+  .hero-logo-data {
+    font-size: 24px;
+    letter-spacing: 0.5px;
+  }
+  .hero-title-data {
+    font-size: 20px;
+  }
+  .Data-header {
+    padding: 2.5rem 0.75rem 1.5rem;
+  }
+  .Data-header h1 {
+    font-size: 1.8rem;
+  }
+  .Data-header p {
     font-size: 0.9rem;
+    padding: 0 0.5rem;
+  }
+  .Data-footer {
+    padding: 1.2rem 0.75rem;
+    font-size: 0.85rem;
+  }
+  .Data {
+    min-height: 700px;
+  }
+}
+
+/* Маленькие телефоны (iPhone SE / 360px) */
+@media (max-width: 360px) {
+  .hero-logo-data {
+    font-size: 20px;
+  }
+  .hero-title-data {
+    font-size: 18px;
+  }
+  .Data-header h1 {
+    font-size: 1.6rem;
+  }
+  .Data-header p {
+    font-size: 0.85rem;
+  }
+  .Data-footer {
+    font-size: 0.8rem;
+  }
+}
+
+/* ---------- Touch-улучшения ---------- */
+@media (hover: none) and (pointer: coarse) {
+  .hero-logo-data,
+  .hero-title-data {
+    -webkit-tap-highlight-color: transparent;
+  }
+  .Data-footer {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* Поддержка Safe Area */
+@supports (padding: max(0px)) {
+  .Data {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+  .Data-footer {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
 }
 
@@ -115,16 +275,13 @@ html {
 ::-webkit-scrollbar {
   width: 10px;
 }
-
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
-
 ::-webkit-scrollbar-thumb {
   background: #2F3542;
   border-radius: 4px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background:#FD4943; ;
+  background: #FD4943;
 }
