@@ -8,6 +8,8 @@ import Why from './layout/why/Why'
 import Service from './layout/servic/Service'
 import TimeBlock from './layout/timeBlock/TimeBlock'
 import Data from './layout/сardSlider/Data'
+import Footer from './layout/footer/Footer'
+import SectionGlobal from './layout/sectionGlobal/SectionGlobal'
 
 function App() {
   useEffect(() => {
@@ -58,6 +60,8 @@ function App() {
       <Service />
       <Data />
       <MapKit />
+      <SectionGlobal />
+      <Footer />
     </div>
   );
 }

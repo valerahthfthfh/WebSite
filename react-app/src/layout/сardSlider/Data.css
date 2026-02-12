@@ -27,10 +27,52 @@
   margin-top: 80px;
 }
 
+.baga-hud {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 40px;
+  margin-bottom: 120px;
+  padding: 20px;
+  max-width: 1450px;
+  width: 100%;
+  margin-left: auto;  /* 👈 центрирование */
+  margin-right: auto; /* 👈 центрирование */
+}
+
+.baga-hud-title,
+.baga-hud-text {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 равные колонки */
+  width: 100%;
+  max-width: 1400px; /* при необходимости */
+  text-align: center;
+}
+
+.baga-hud-title h2,
+.baga-hud-text p {
+  margin: 0;
+  padding: 0px;
+}
+
+.baga-hud-title h2 {
+  font-size: 60px;
+}
+
+.baga-hud-title h2 span {
+  color: #FD4943;
+}
+
+.baga-hud-text p {
+  font-size: 20px;
+}
 .hero-logo-data {
   margin: 0;
   color: white;
 }
+
+
 
 .hero-logo-data span {
   color: #FD4943;

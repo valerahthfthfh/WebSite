@@ -78,6 +78,11 @@ function MainForm() {
           <div className="experience-text">
             <p>C 2012 года Устанавливаем, обслуживаем и<br /> ремонтируем оборудование. <br /> Работаем честно - как для себя.</p>
           </div>
+
+          <div className='button-rega'>
+            <button className='button-1'>Узнать больше</button>
+            <button className='button-2'>Отправить заявку</button>
+          </div>
         </section>
 
         {/* Правая часть */}

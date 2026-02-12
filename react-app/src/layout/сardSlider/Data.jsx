@@ -89,6 +89,21 @@ function Data() {
       
         <CardSlider testimonials={testimonials} />
       </div>
+
+      <div className='baga-hud'>
+        <div className='baga-hud-title'>
+          <h2>100<span>%</span></h2>
+          <h2>100<span>+</span></h2>
+          <h2>1<span>г</span></h2>
+          <h2>800<span>+</span></h2>
+        </div>
+        <div className='baga-hud-text'>
+          <p>Надежность</p>
+          <p>Обращений</p>
+          <p>Гарантия</p>
+          <p>Довольных клиентов</p>
+        </div>
+      </div>
     </div>
   );
 }
