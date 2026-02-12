@@ -10,6 +10,7 @@ import TimeBlock from './layout/timeBlock/TimeBlock'
 import Data from './layout/сardSlider/Data'
 import Footer from './layout/footer/Footer'
 import SectionGlobal from './layout/sectionGlobal/SectionGlobal'
+import ContactForm from './layout/contactForm/ContactForm'
 
 function App() {
   useEffect(() => {
@@ -60,6 +61,7 @@ function App() {
       <Service />
       <Data />
       <MapKit />
+      <ContactForm />
       <SectionGlobal />
       <Footer />
     </div>

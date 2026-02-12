@@ -1,0 +1,155 @@
+.contact-form-main {
+  display: flex;
+  justify-content: space-between; /* вместо space-evenly */
+  align-items: center; /* выравнивание по центру */
+  gap: 500px; /* расстояние между блоками */
+  max-width: 1800px;
+  margin: 0 auto;
+
+}
+
+.input-number-phone {
+  flex: 1; /* занимает доступное пространство */
+  max-width: 1700px;
+}
+
+.people {
+  width: 450px; /* уменьшил */
+  height: auto; /* убрал фиксированную высоту */
+  display: flex;
+  justify-content: flex-end;
+}
+
+.people img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.input-number-phone p {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 18px;
+  color: #7D8694;
+  line-height: 1.5;
+}
+
+.fff {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.input-number-phone input {
+  flex: 1;
+  padding: 16px 20px; /* убрал огромные padding-right/padding-bottom */
+  border: 2px solid #E0E4E9;
+  border-radius: 12px;
+  font-size: 18px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  background-color: white;
+  color: #2F3542;
+  height: 60px;
+}
+
+.input-number-phone input:focus {
+  border-color: #FD4943;
+  outline: none;
+}
+
+.input-number-phone button {
+  width: 160px; /* фиксированная ширина */
+  border: none;
+  padding: 0 20px;
+  background-color: #FD4943;
+  color: white;
+  border-radius: 12px; /* уменьшил */
+  font-size: 18px;
+  font-weight: 600;
+  height: 60px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+/* Адаптация */
+@media (max-width: 1200px) {
+  .contact-form-main {
+    padding: 30px 20px;
+    gap: 30px;
+  }
+  
+  .people {
+    width: 380px;
+  }
+}
+
+@media (max-width: 992px) {
+  .contact-form-main {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .input-number-phone {
+    max-width: 100%;
+  }
+  
+  .people {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+  
+  .fff {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-logo {
+    font-size: 40px;
+  }
+  
+  .hero-title-g {
+    font-size: 30px;
+  }
+  
+  .input-number-phone p {
+    font-size: 16px;
+  }
+  
+  .fff {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .input-number-phone input,
+  .input-number-phone button {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .input-number-phone button {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form-main {
+    padding: 20px 15px;
+  }
+  
+  .hero-logo {
+    font-size: 32px;
+  }
+  
+  .hero-title-g {
+    font-size: 24px;
+  }
+  
+  .people {
+    max-width: 300px;
+  }
+}
