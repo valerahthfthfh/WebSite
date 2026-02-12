@@ -1,8 +1,7 @@
 /* ContactSection.css */
-
 .contact-container {
   width: 100%;
-  min-height: 100vh;
+  min-height: 85vh;
   padding: 40px 60px;
   box-sizing: border-box;
   background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
@@ -17,15 +16,16 @@
   align-items: stretch;
 }
 
-/* Левая часть с картой - ИСПРАВЛЕНА */
 .left-section {
   flex: 1;
   min-width: 0;
 }
+.button-link { width: 65px; }
+.button-ls { width: 30px; }
 
 .map-wrapper {
   width: 100%;
-  height: 100%;
+  height: 80%;
   min-height: 600px;
   background: white;
   border-radius: 20px;
@@ -34,31 +34,25 @@
   position: relative;
   transition: all 0.3s ease;
 }
-
-/* Важно для карты */
 .yandex-map {
   width: 100% !important;
   height: 100% !important;
   border-radius: 20px;
 }
 
-/* Правая часть с контактами */
 .right-section {
   flex: 0 0 750px;
   display: flex;
   align-items: stretch;
 }
-
 .contact-info {
   padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  height: 80%;
   width: 100%;
 }
-
-/* ЗАГОЛОВКИ */
 .contact-info h2 {
   font-size: 42px;
   font-weight: 700;
@@ -66,11 +60,7 @@
   margin: 0 0 25px 0;
   line-height: 1.3;
 }
-
-.contact-info h2 span {
-  color: #FD4943;
-}
-
+.contact-info h2 span { color: #FD4943; }
 .contact-info h3 {
   font-size: 24px;
   font-weight: 600;
@@ -78,7 +68,6 @@
   margin: 0 0 20px 0;
 }
 
-/* Блок адреса и часов в одной строке */
 .address-row {
   display: flex;
   gap: 30px;
@@ -86,14 +75,12 @@
   align-items: flex-start;
   margin-bottom: 20px;
 }
-
 .address-item, .hours-item {
   flex: 1;
   display: flex;
   align-items: flex-start;
 }
 
-/* КОНТАКТЫ В ОДНОЙ СТРОКЕ */
 .contacts-row {
   display: flex;
   gap: 30px;
@@ -101,55 +88,41 @@
   align-items: flex-start;
   margin-bottom: 20px;
 }
-
-/* Иконки */
 .icon-wrapper {
   flex-shrink: 0;
   margin-right: 15px;
   font-size: 20px;
   margin-top: 3px;
 }
-
-/* Текст адреса */
 .address-text {
   font-size: 16px;
   line-height: 1.5;
   color: #2F3542;
   margin: 0;
 }
-
 .address-text strong {
   color: #333;
   display: block;
   margin-bottom: 5px;
 }
-
-/* Часы работы */
 .working-hours {
   font-size: 15px;
   color: #7D8694;
   margin: 0;
 }
-
 .working-hours strong {
   color: #2F3542;
   display: block;
   margin-bottom: 5px;
 }
+.working-hours span { color: #7D8694; }
 
-.working-hours span {
-  color: #7D8694;
-}
-
-
-/* Контакты (телефон и email) */
 .contact-item {
   flex: 1;
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
-
 .phone-link {
   display: block;
   font-size: 20px;
@@ -159,8 +132,6 @@
   transition: color 0.3s;
   white-space: nowrap;
 }
-
-
 .email-link {
   display: inline-block;
   font-size: 16px;
@@ -169,20 +140,17 @@
   transition: color 0.3s;
   white-space: nowrap;
 }
-
 .email-link:hover {
   color: #2F3542;
   text-decoration: underline;
 }
 
-/* Блок кнопки и соцсетей В ОДНОЙ СТРОКЕ */
 .action-row {
   display: flex;
   align-items: center;
   gap: 20px;
   margin-bottom: 20px;
 }
-
 .callback-button {
   padding: 28px 40px;
   background: #FD4943;
@@ -195,26 +163,21 @@
   transition: all 0.3s ease;
   white-space: nowrap;
 }
-
 .callback-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 15px 30px rgba(182, 10, 10, 0.4);
 }
-
 .section-title h3 {
   font-size: 42px;
   font-weight: 300;
   margin-bottom: 40px;
   margin-top: 20px;
 }
-
-/* Соцсети */
 .social-icons {
   display: flex;
   gap: 10px;
   flex-shrink: 0;
 }
-
 .social-link {
   display: flex;
   align-items: center;
@@ -228,117 +191,175 @@
   transition: all 0.3s ease;
   text-decoration: none;
 }
-
 .social-link:hover {
-  
   color: white;
   transform: translateY(-2px);
 }
-
-/* Футер */
 .footer-note {
   text-align: left;
-  font-size: 14px;
+  font-size: 17px;
   color: #888;
-  padding-top: 20px;
-  margin-top: auto;
-  border-top: 1px solid #eee;
+  padding-top: 40px;
+  margin-top: 15px;
+  border-top: 3px solid #FFECEE;
 }
 
-/* Адаптивность */
+/* ============ ИДЕАЛЬНАЯ АДАПТАЦИЯ ============ */
+
+@media (max-width: 1400px) {
+  .contact-container { padding: 40px 40px; }
+  .right-section { flex: 0 0 650px; }
+  .contact-info h2 { font-size: 38px; }
+}
+
 @media (max-width: 1200px) {
-  .content-wrapper {
-    gap: 30px;
-    max-width: 100%;
-  }
-  
-  .right-section {
-    flex: 0 0 350px;
-  }
-  
-  .map-wrapper {
-    min-height: 500px;
-  }
+  .content-wrapper { gap: 30px; max-width: 100%; }
+  .right-section { flex: 0 0 550px; }
+  .map-wrapper { min-height: 500px; }
+  .contact-info { padding: 35px; }
+  .contact-info h2 { font-size: 34px; }
+  .callback-button { padding: 24px 35px; font-size: 17px; }
 }
 
-
+@media (max-width: 992px) {
+  .contact-container { padding: 30px 25px; }
+  .right-section { flex: 0 0 450px; }
+  .contact-info { padding: 30px; }
+  .contact-info h2 { font-size: 30px; }
+  .address-row, .contacts-row { gap: 20px; }
+  .phone-link { font-size: 18px; }
+  .email-link { font-size: 15px; }
+  .callback-button { padding: 20px 30px; }
+  .social-link { margin-left: 30px; }
+}
 
 @media (max-width: 768px) {
-  .contact-container {
-    padding: 20px;
+  .contact-container { padding: 25px 20px; }
+  .content-wrapper { flex-direction: column; }
+  .right-section { flex: 1; width: 100%; }
+  .map-wrapper { min-height: 400px; height: 400px; }
+  .contact-info { 
+    padding: 30px; 
+    height: auto; 
+    max-width: 600px; 
+    margin: 0 auto; 
   }
-  
-  .content-wrapper {
-    flex-direction: column;
+  .address-row, .contacts-row { 
+    flex-direction: column; 
+    gap: 20px; 
   }
-  
-  .right-section {
-    flex: 1;
-    width: 100%;
+  .address-item, .hours-item, .contact-item { 
+    width: 100%; 
   }
-  
-  .map-wrapper {
-    min-height: 400px;
+  .action-row { 
+    flex-direction: column; 
+    gap: 20px; 
+    align-items: stretch; 
   }
-  
-  .contact-info {
-    padding: 30px;
+  .callback-button { 
+    width: 100%; 
+    padding: 18px 25px; 
+    font-size: 17px; 
   }
-  
-  .address-row,
-  .contacts-row {
-    flex-direction: column;
-    gap: 20px;
+  .social-icons { 
+    width: 100%; 
+    justify-content: center; 
   }
-  
-  .address-item, 
-  .hours-item,
-  .contact-item {
-    width: 100%;
+  .social-link { margin-left: 0; }
+  .contact-info h2 { font-size: 28px; }
+  .contact-info h3 { font-size: 22px; }
+}
+
+@media (max-width: 600px) {
+  .contact-container { padding: 20px 15px; }
+  .map-wrapper { min-height: 350px; height: 350px; }
+  .contact-info { padding: 25px; }
+  .contact-info h2 { font-size: 26px; margin-bottom: 20px; }
+  .contact-info h3 { font-size: 20px; }
+  .address-text { font-size: 15px; }
+  .working-hours { font-size: 14px; }
+  .phone-link { font-size: 17px; }
+  .email-link { font-size: 14px; }
+  .callback-button { 
+    padding: 16px 20px; 
+    font-size: 16px; 
+    border-radius: 50px; 
   }
-  
-  .action-row {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .callback-button {
-    width: 100%;
-  }
-  
-  .social-icons {
-    width: 100%;
-    justify-content: center;
+  .footer-note { 
+    font-size: 15px; 
+    padding-top: 30px; 
   }
 }
 
 @media (max-width: 480px) {
-  .map-wrapper {
-    min-height: 300px;
+  .contact-container { padding: 15px 12px; }
+  .map-wrapper { 
+    min-height: 300px; 
+    height: 300px; 
+    border-radius: 16px; 
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
   }
-  
-  .contact-info {
-    padding: 20px;
+  .contact-info { padding: 20px; }
+  .contact-info h2 { font-size: 24px; }
+  .contact-info h3 { font-size: 18px; }
+  .icon-wrapper { font-size: 18px; margin-right: 12px; }
+  .address-text { font-size: 14px; }
+  .working-hours { font-size: 13px; }
+  .phone-link { 
+    font-size: 16px; 
+    white-space: normal; 
+    word-break: break-all; 
   }
-  
-  .callback-button {
-    padding: 15px;
-    font-size: 16px;
+  .email-link { font-size: 13px; }
+  .callback-button { 
+    padding: 14px 18px; 
+    font-size: 15px; 
   }
-  
-  .contact-info h2 {
-    font-size: 22px;
+  .social-link { 
+    width: 40px; 
+    height: 40px; 
+    font-size: 18px; 
   }
-  
-  .contact-info h3 {
-    font-size: 18px;
+  .footer-note { 
+    font-size: 14px; 
+    padding-top: 25px; 
   }
-  
-  .phone-link {
-    font-size: 16px;
+}
+
+@media (max-width: 360px) {
+  .contact-info h2 { font-size: 22px; }
+  .contact-info h3 { font-size: 17px; }
+  .phone-link { font-size: 15px; }
+  .callback-button { font-size: 14px; padding: 12px 16px; }
+  .footer-note { font-size: 13px; }
+  .social-link { width: 35px; height: 35px; font-size: 16px; }
+}
+
+/* Touch-улучшения */
+@media (hover: none) and (pointer: coarse) {
+  .callback-button:hover { 
+    transform: none; 
+    box-shadow: none; 
   }
-  
-  .email-link {
-    font-size: 14px;
+  .callback-button:active { 
+    transform: scale(0.97); 
+    box-shadow: 0 10px 20px rgba(182,10,10,0.3); 
+  }
+  .social-link:hover { transform: none; }
+  .social-link:active { transform: scale(0.95); }
+}
+
+/* Safe Area */
+@supports (padding: max(0px)) {
+  .contact-container {
+    padding-left: max(60px, env(safe-area-inset-left));
+    padding-right: max(60px, env(safe-area-inset-right));
+    padding-bottom: max(40px, env(safe-area-inset-bottom));
+  }
+  @media (max-width: 768px) {
+    .contact-container {
+      padding-left: max(20px, env(safe-area-inset-left));
+      padding-right: max(20px, env(safe-area-inset-right));
+    }
   }
 }

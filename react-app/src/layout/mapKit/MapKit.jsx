@@ -1,10 +1,15 @@
 import React from 'react';
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
 import './MapKit.css';
+import Time from '../../shared/img/time.png'
+import Telegram from '../../shared/img/telegram.png'
+import Email from '../../shared/img/email.png'
+import Avito from '../../shared/img/avito.png'
+import Poin from '../../shared/img/point.png'
+import Phone from '../../shared/img/phone.png'
 
 function MapKit() {
   const location = [56.117703, 47.222953];
-  
   return (
     <div className="contact-container">
       <div className="content-wrapper">
@@ -63,7 +68,7 @@ function MapKit() {
               <div className="address-row">
                 <div className="address-item">
                   <div className="icon-wrapper">
-                    <i className="icon-location">📍</i>
+                    <img src={Poin} alt="Локация" className='button-ls'/>
                   </div>
                   <div className="text-content">
                     <p className="address-text">
@@ -75,10 +80,10 @@ function MapKit() {
                 
                 <div className="hours-item">
                   <div className="icon-wrapper">
-                    <i className="icon-time">🕒</i>
+                    <img src={Time} alt="Время" className='button-ls'/>
                   </div>
                   <div className="text-content">
-                    <p className="working-hours">
+                    <p className="address-text">
                       <strong>пн-пт 09:00–21:00</strong>
                       сб 09:00–18:00
                     </p>
@@ -93,7 +98,7 @@ function MapKit() {
             <div className="contacts-row">
               <div className="contact-item">
                 <div className="icon-wrapper">
-                  <i className="icon-phone">📞</i>
+                  <img src={Phone} alt="Телефон" className='button-ls'/>
                 </div>
                 <div className="text-content">
                   <a href="tel:+78001234567" className="phone-link">
@@ -104,7 +109,7 @@ function MapKit() {
               
               <div className="contact-item">
                 <div className="icon-wrapper">
-                  <i className="icon-email">✉️</i>
+                  <img src={Email} alt="Email" className='button-ls'/>
                 </div>
                 <div className="text-content">
                   <a href="mailto:kotloff30@gmail.com" className="email-link">
@@ -121,10 +126,10 @@ function MapKit() {
               
               <div className="social-icons">
                 <a href="#" className="social-link">
-                  <i className="icon-social">📱</i>
+                   <img src={Avito} alt="telegram" className='button-link'/>
                 </a>
                 <a href="#" className="social-link">
-                  <i className="icon-social">💬</i>
+                  <img src={Telegram} alt="telegram" className='button-link'/>
                 </a>
               </div>
             </div>
