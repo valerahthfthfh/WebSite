@@ -101,7 +101,7 @@ export class AppService {
     const timeNow = date.toLocaleTimeString('ru-RU');
     const dateNow = date.toLocaleDateString('ru-RU');
 
-    const message = `НОВАЯ ЗАЯВКА С САЙТА
+    const message = `НОВАЯ ЗАЯВКА С САЙТА❤
 
 Имя: ${name}
 Телефон: ${phone}
