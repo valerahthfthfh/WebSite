@@ -16,7 +16,7 @@ let AppService = class AppService {
     FIREBASE_URL = 'https://dataform-a57ff-default-rtdb.asia-southeast1.firebasedatabase.app';
     GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxn4WNchvPajG2R63BfuyIW9vmbz2tK3TZqWaMH6Tg2IJJIfyrjruMRJJyCn1SPjjTb/exec';
     BOT_TOKEN = '8033399130:AAGI_89YLNq-FBrD5CacJK0bBSqtC7hwSdc';
-    BOT_API_URL = 'http://localhost:5001';
+    ADMIN_ID = '804822685';
     async handleRequest(data) {
         const { name, phone, comment } = data;
         if (!name || !phone) {
@@ -79,45 +79,24 @@ let AppService = class AppService {
         });
         console.log('Google Sheets ответ:', response.data);
     }
-    async getAdmins() {
-        try {
-            console.log('Запрос списка админов...');
-            const response = await axios_1.default.get(`${this.BOT_API_URL}/get_admins`, {
-                timeout: 5000
-            });
-            console.log('Получен список админов:', response.data);
-            return response.data;
-        }
-        catch (error) {
-            console.error('Ошибка загрузки админов:', error.message);
-            console.log('Использую список админов по умолчанию: [804822685]');
-            return [804822685];
-        }
-    }
     async sendToTelegram(name, phone, comment, applicationId) {
         const date = new Date();
-        const dateTime = `${date.toLocaleDateString('ru-RU')}, ${date.toLocaleTimeString('ru-RU')}`;
-        const message = `<b>НОВАЯ ЗАЯВКА С САЙТА</b>
+        const timeNow = date.toLocaleTimeString('ru-RU');
+        const dateNow = date.toLocaleDateString('ru-RU');
+        const message = `НОВАЯ ЗАЯВКА С САЙТА❤
 
-<b>ФИО:</b> ${name}
-<b>Телефон:</b> <code>${phone}</code>
-<b>Комментарий:</b> ${comment || 'Не указан'}
-<b>Дата/Время:</b> ${dateTime}`;
-        const admins = await this.getAdmins();
-        console.log('Отправка уведомлений админам:', admins);
-        for (const adminId of admins) {
-            try {
-                await axios_1.default.post(`https://api.telegram.org/bot${this.BOT_TOKEN}/sendMessage`, {
-                    chat_id: adminId,
-                    text: message,
-                    parse_mode: 'HTML',
-                });
-                console.log(`✅ Уведомление отправлено админу ${adminId}`);
-            }
-            catch (error) {
-                console.error(`❌ Ошибка отправки админу ${adminId}:`, error.message);
-            }
-        }
+Имя: ${name}
+Телефон: ${phone}
+Комментарий: ${comment || 'Не указан'}
+ID: ${applicationId}
+Дата: ${dateNow}
+Время: ${timeNow}`;
+        const response = await axios_1.default.post(`https://api.telegram.org/bot${this.BOT_TOKEN}/sendMessage`, {
+            chat_id: this.ADMIN_ID,
+            text: message,
+            parse_mode: 'HTML',
+        });
+        console.log('Telegram ответ:', response.data.ok);
     }
 };
 exports.AppService = AppService;
