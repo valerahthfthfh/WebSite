@@ -1,0 +1,385 @@
+/* CardSlider.css */
+.card-slider-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cards-container-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 550px;
+  perspective: 1000px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.card {
+  position: absolute;
+  width: 100%;
+  min-width: 400px;
+  max-width: 900px;
+  background: white;
+  border-radius: 25px;
+  padding: 3.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card.active {
+  opacity: 1;
+  transform: translateX(0) scale(1) rotateY(0);
+  z-index: 3;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.18);
+  width: 100%;
+}
+
+.card.prev {
+  transform: translateX(-80%) scale(0.8);
+  opacity: 0.3;
+  filter: blur(1px);
+}
+.card.next {
+  transform: translateX(80%) scale(0.8);
+  opacity: 0.3;
+  filter: blur(1px);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2.5rem;
+}
+
+.quote-icon {
+  background: #FD4943;
+  color: white;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rating {
+  display: flex;
+  gap: 0.4rem;
+}
+.star.filled {
+  color: #FFD700;
+  stroke: #FFD700;
+}
+.star.empty {
+  color: #E5E7EB;
+  stroke: #E5E7EB;
+}
+
+.testimonial-text {
+  font-size: 1.4rem;
+  line-height: 1.9;
+  color: #374151;
+  margin-bottom: 2.5rem;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  min-height: 140px;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.card-footer {
+  border-top: 2px solid #F3F4F6;
+  padding-top: 2rem;
+  margin-top: auto;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.author-image {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #F3F4F6;
+  flex-shrink: 0;
+}
+.author-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.author-details {
+  flex-grow: 1;
+  text-align: left;
+}
+.author-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.5rem 0;
+}
+.author-role {
+  font-size: 1.05rem;
+  color: #6B7280;
+  margin: 0;
+  font-weight: 500;
+}
+
+.slider-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 1px;
+  padding: 1.5rem 2rem;
+}
+.slider-nav-btn {
+  background: #FD4943;
+  border: none;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  z-index: 4;
+  flex-shrink: 0;
+}
+.slider-nav-btn:hover {
+  transform: translateY(-3px);
+  background: #f3332c;
+}
+.slider-nav-btn:active {
+  transform: translateY(-1px);
+}
+.current-card-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #4B5563;
+  padding: 0 1.5rem;
+  background: #F8FAFC;
+  border-radius: 30px;
+  height: 50px;
+  min-width: 100px;
+  justify-content: center;
+}
+.current-card-number {
+  color: #111827;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.card-slash {
+  color: #9CA3AF;
+  margin: 0 0.25rem;
+}
+.total-cards {
+  color: #6B7280;
+  font-weight: 500;
+}
+
+/* ============ ИДЕАЛЬНАЯ АДАПТАЦИЯ ============ */
+
+/* Очень большие экраны */
+@media (min-width: 1600px) {
+  .card-slider-container { max-width: 1600px; }
+  .cards-container { height: 600px; }
+  .card { max-width: 1000px; padding: 4rem; height: 550px; }
+  .testimonial-text { font-size: 1.6rem; min-height: 160px; }
+  .slider-controls { gap: 4rem; padding: 2rem 3rem; }
+  .slider-nav-btn { width: 70px; height: 70px; }
+  .current-card-info { font-size: 1.5rem; height: 60px; min-width: 120px; }
+}
+
+/* Десктоп средний */
+@media (max-width: 1400px) {
+  .card-slider-container { max-width: 1200px; }
+  .cards-container { height: 520px; }
+  .card { max-width: 800px; padding: 3rem; height: 480px; }
+  .testimonial-text { font-size: 1.35rem; }
+}
+
+@media (max-width: 1200px) {
+  .card-slider-container { max-width: 1100px; }
+  .cards-container { height: 500px; }
+  .card { max-width: 750px; padding: 2.8rem; height: 460px; }
+  .testimonial-text { font-size: 1.3rem; min-height: 130px; }
+  .card.prev { transform: translateX(-75%) scale(0.8); }
+  .card.next { transform: translateX(75%) scale(0.8); }
+}
+
+@media (max-width: 992px) {
+  .card-slider-container { max-width: 900px; padding: 2rem 0.75rem 3rem; }
+  .cards-container { height: 480px; }
+  .card { max-width: 650px; padding: 2.5rem; height: 440px; }
+  .testimonial-text { font-size: 1.25rem; min-height: 120px; }
+  .card.prev { transform: translateX(-70%) scale(0.8); opacity: 0.25; }
+  .card.next { transform: translateX(70%) scale(0.8); opacity: 0.25; }
+  .quote-icon { width: 60px; height: 60px; }
+  .author-image { width: 70px; height: 70px; }
+}
+
+/* Планшеты вертикальные */
+@media (max-width: 768px) {
+  .card-slider-container { padding: 1.5rem 0.5rem 2.5rem; }
+  .cards-container { height: 440px; }
+  .card { 
+    padding: 2rem; 
+    max-width: 85%; 
+    min-width: 300px; 
+    height: 400px; 
+    border-radius: 20px;
+  }
+  .card.prev { transform: translateX(-65%) scale(0.75); opacity: 0.15; filter: blur(2px); }
+  .card.next { transform: translateX(65%) scale(0.75); opacity: 0.15; filter: blur(2px); }
+  .testimonial-text { 
+    font-size: 1.15rem; 
+    line-height: 1.7; 
+    min-height: 110px; 
+    padding: 0;
+  }
+  .quote-icon { width: 55px; height: 55px; }
+  .rating { gap: 0.3rem; }
+  .star.filled, .star.empty { width: 18px; height: 18px; }
+  .author-image { width: 65px; height: 65px; }
+  .author-name { font-size: 1.2rem; }
+  .author-role { font-size: 1rem; }
+  .slider-controls { gap: 2rem; padding: 1rem 1.5rem; }
+  .slider-nav-btn { width: 55px; height: 55px; }
+  .current-card-info { font-size: 1.1rem; height: 45px; min-width: 90px; }
+  .current-card-number { font-size: 1.3rem; }
+}
+
+/* Крупные телефоны */
+@media (max-width: 600px) {
+  .cards-container { height: 420px; }
+  .card { padding: 1.8rem; height: 380px; max-width: 90%; }
+  .testimonial-text { font-size: 1.1rem; min-height: 100px; }
+  .quote-icon { width: 50px; height: 50px; }
+  .author-image { width: 60px; height: 60px; }
+  .author-name { font-size: 1.15rem; }
+  .author-role { font-size: 0.95rem; }
+  .slider-controls { gap: 1.5rem; padding: 0.8rem 1.2rem; }
+  .slider-nav-btn { width: 50px; height: 50px; }
+  .current-card-info { font-size: 1rem; height: 40px; min-width: 80px; }
+}
+
+/* Телефоны (до 480px) */
+@media (max-width: 480px) {
+  .card-slider-container { padding: 1rem 0.25rem 2rem; }
+  .cards-container { height: 400px; }
+  .card { 
+    padding: 1.5rem; 
+    height: 360px; 
+    max-width: 92%; 
+    border-radius: 18px;
+  }
+  .card.prev, .card.next { 
+    opacity: 0.08; 
+    filter: blur(3px); 
+    transform: translateX(-60%) scale(0.7);
+  }
+  .card.next { transform: translateX(60%) scale(0.7); }
+  .testimonial-text { 
+    font-size: 1rem; 
+    line-height: 1.6; 
+    min-height: 90px; 
+    margin-bottom: 1.5rem;
+  }
+  .card-header { margin-bottom: 1.5rem; }
+  .quote-icon { width: 45px; height: 45px; }
+  .rating { gap: 0.2rem; }
+  .star.filled, .star.empty { width: 16px; height: 16px; }
+  .author-image { width: 55px; height: 55px; border-width: 3px; }
+  .author-name { font-size: 1.05rem; }
+  .author-role { font-size: 0.9rem; }
+  .slider-controls { 
+    gap: 1.2rem; 
+    padding: 0.6rem 1rem; 
+    border-radius: 30px; 
+    margin-top: 0.5rem;
+  }
+  .slider-nav-btn { width: 45px; height: 45px; }
+  .current-card-info { 
+    font-size: 0.95rem; 
+    height: 38px; 
+    min-width: 70px; 
+    padding: 0 0.8rem;
+  }
+  .current-card-number { font-size: 1.1rem; }
+}
+
+/* Маленькие телефоны (iPhone SE) */
+@media (max-width: 360px) {
+  .cards-container { height: 380px; }
+  .card { padding: 1.2rem; height: 340px; }
+  .testimonial-text { font-size: 0.95rem; min-height: 85px; }
+  .quote-icon { width: 40px; height: 40px; }
+  .author-image { width: 50px; height: 50px; }
+  .author-name { font-size: 1rem; }
+  .author-role { font-size: 0.85rem; }
+  .slider-nav-btn { width: 40px; height: 40px; }
+  .current-card-info { font-size: 0.85rem; height: 35px; min-width: 65px; }
+}
+
+/* Анимации */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(100px) scale(0.9); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+.card.active { animation: slideIn 0.5s ease-out; }
+
+.card:hover:not(.active) { opacity: 0.5; transform: scale(0.92); }
+
+.card-slider-container { animation: fadeInUp 0.8s ease-out; }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Touch-оптимизация */
+@media (hover: none) and (pointer: coarse) {
+  .slider-nav-btn:hover { transform: none; background: #FD4943; }
+  .slider-nav-btn:active { transform: scale(0.95); background: #f3332c; }
+  .card:hover:not(.active) { opacity: 0.3; transform: scale(0.8); }
+}
+
+/* Safe Area */
+@supports (padding: max(0px)) {
+  .card-slider-container {
+    padding-left: max(0.5rem, env(safe-area-inset-left));
+    padding-right: max(0.5rem, env(safe-area-inset-right));
+  }
+}

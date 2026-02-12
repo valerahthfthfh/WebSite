@@ -27,6 +27,7 @@ body {
   flex-direction: column;
 }
 
+/* ---------- HEADER ---------- */
 .header {
   background: white;
   border-bottom: 3px solid var(--color-light-gray);
@@ -78,7 +79,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  
 }
 
 .phone-number {
@@ -89,14 +89,14 @@ body {
   color: transparent;
   background: linear-gradient(to right, #181a1f, #ff0800);
   background-clip: text;
-  -webkit-background-clip: text; 
-  -webkit-text-fill-color: transparent; 
-  background-size: 100% auto; 
-  background-position: left center; 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 100% auto;
+  background-position: left center;
 }
 
 .phone-number:hover {
-  background-position: right center; 
+  background-position: right center;
 }
 
 .phone-hours {
@@ -105,10 +105,10 @@ body {
   margin-top: 2px;
 }
 
-/* Основной контент */
+/* ---------- MAIN CONTENT ---------- */
 .main-content {
   flex: 1;
-  padding: 40px 20px;
+  padding: 40px 20px 10%;
 }
 
 .content-container {
@@ -123,11 +123,11 @@ body {
 .info-section {
   flex: 1;
   padding: 24px;
-  padding-top: 130px;
+  padding-top: 80px;
 }
 
 .main-title {
-  font-size: 46px;
+  font-size: 58px;
   font-weight: 700;
   color: var(--color-black);
   margin-bottom: 15px;
@@ -195,6 +195,52 @@ body {
   margin-bottom: 36px;
 }
 
+.button-rega {
+  margin-top: 60px;
+  padding-right: 60px;
+}
+
+.button-1 {
+  border-style: none;
+  background-color: #FD4943;
+  color: white;
+  padding: 23px;
+  font-size: 20px;
+  border-radius: 100px;
+  margin-right: 27px;
+  font-weight: 900px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.1);
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.button-2 {
+  border-style: none;
+  background-color: #2F3542;
+  color: white;
+  padding: 23px;
+  font-size: 20px;
+  border-radius: 100px;
+  font-weight: 900px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding-left: 30px;
+  padding-right: 30px;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.1);
+}
+
+.button-1:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 70px rgba(1, 0, 15, 0.15);
+}
+
+.button-2:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 70px rgba(1, 0, 15, 0.15);
+}
+
 .login-form div p {
   margin: 0 0 8px 0;
   font-weight: 700;
@@ -253,11 +299,6 @@ body {
   display: none;
 }
 
-.login-form input::placeholder,
-.login-form textarea::placeholder {
-  text-align: left;
-}
-
 .login-form button {
   width: 100%;
   padding: 16px 24px;
@@ -272,6 +313,7 @@ body {
   margin-top: 8px;
   letter-spacing: 0.5px;
 }
+
 .login-form button:hover {
   background: var(--color-primary-dark);
   transform: translateY(-2px);
@@ -281,7 +323,35 @@ body {
   transform: translateY(0);
 }
 
-/* Адаптивность */
+/* ---------- СОСТОЯНИЯ ФОРМЫ (из React-компонента) ---------- */
+.success-message {
+  margin: 15px 0 25px;
+  padding: 16px 20px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+button.loading,
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+button:disabled:hover {
+  background: var(--color-primary);
+  transform: none;
+}
+
+/* ---------- МОБИЛЬНАЯ АДАПТАЦИЯ (ТОЛЬКО НУЖНОЕ) ---------- */
+
+/* Планшеты и небольшие ноутбуки */
 @media (max-width: 1024px) {
   .content-container {
     flex-direction: column;
@@ -291,74 +361,279 @@ body {
   .form-section {
     flex: 1;
     width: 100%;
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
   }
   
   .main-title {
+    font-size: 48px;
+  }
+  
+  .service-item h1 {
+    font-size: 32px;
+  }
+
+  .info-section {
+    padding-top: 40px;
+  }
+}
+
+/* Между 900px и 769px — шапка всё ещё в строку */
+@media (max-width: 900px) {
+  .header-container {
+    padding: 20px 24px;
+  }
+  
+  .logo-main {
+    font-size: 26px;
+    padding-bottom: 6px;
+  }
+  
+  .logo-tagline {
+    font-size: 11px;
+  }
+  
+  .phone-number {
+    font-size: 22px;
+  }
+  
+  .phone-hours {
+    font-size: 13px;
+  }
+}
+
+/* Планшеты вертикальные */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 18px 20px;
+    /* остаёмся в строке, не колонка! */
+  }
+  
+  .logo-main {
+    font-size: 24px;
+    padding-bottom: 4px;
+  }
+  
+  .logo-tagline {
+    font-size: 10px;
+  }
+  
+  .phone-number {
+    font-size: 20px;
+  }
+  
+  .phone-hours {
+    font-size: 12px;
+  }
+  
+  .main-content {
+    padding: 30px 20px 40px;
+  }
+  
+  .main-title {
     font-size: 40px;
+    text-align: left; /* или center — на ваше усмотрение, я оставил left */
   }
   
   .service-item h1 {
     font-size: 28px;
-  }
-}
-
-@media (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-    gap: 16px;
-    text-align: center;
-    padding: 16px;
+    text-align: left;
   }
   
-  .header-phone {
-    align-items: center;
+  .experience-text {
+    text-align: left;
+    font-size: 18px;
   }
   
-  .logo-main {
+  .info-section {
+    padding-top: 20px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .login-form {
+    padding: 32px 28px;
+  }
+  
+  .login-form h2 {
     font-size: 28px;
   }
   
+  .login-form div {
+    margin-bottom: 28px;
+  }
+}
+
+/* Телефоны (горизонтальные и большие) */
+@media (max-width: 600px) {
+  .header-container {
+    padding: 16px 16px;
+  }
+  
+  .logo-main {
+    font-size: 22px;
+  }
+  
   .logo-tagline {
-    font-size: 12px;
+    font-size: 9px;
+    white-space: nowrap;
   }
   
   .phone-number {
     font-size: 18px;
   }
   
-  .main-content {
-    padding: 24px 16px;
+  .phone-hours {
+    font-size: 11px;
   }
   
   .main-title {
-    font-size: 32px;
-    text-align: center;
+    font-size: 36px;
   }
   
   .service-item h1 {
-    font-size: 24px;
-    text-align: center;
+    font-size: 26px;
   }
   
   .experience-text {
-    text-align: center;
+    font-size: 17px;
+  }
+  
+  .login-form {
+    padding: 28px 24px;
+  }
+  
+  .login-form h2 {
+    font-size: 26px;
+  }
+  
+  .login-form > p {
+    margin-bottom: 40px;
+  }
+  
+  .login-form div p {
     font-size: 16px;
+  }
+  
+  .login-form input,
+  .login-form textarea {
+    padding: 14px 16px;
+    font-size: 16px; /* Защита от зума */
+    border-width: 1.5px;
+  }
+  
+  .login-form input {
+    height: 48px;
+  }
+  
+  .login-form textarea {
+    min-height: 100px;
+  }
+  
+  .login-form button {
+    padding: 15px 20px;
+    font-size: 17px;
+  }
+  
+  .success-message {
+    padding: 14px 18px;
+    font-size: 14px;
+  }
+}
+
+/* Маленькие телефоны (до 480px) */
+@media (max-width: 480px) {
+  .header-container {
+    padding: 14px 12px;
+    
+  }
+  
+  .logo-main {
+    font-size: 20px;
+  }
+  
+  .logo-tagline {
+    font-size: 8px;
+  }
+  
+  .phone-number {
+    font-size: 17px;
+  }
+  
+  .phone-hours {
+    font-size: 10px;
+  }
+  
+  .main-title {
+    font-size: 17px;
+    display: none;
+  }
+
+  .info-section {
+    display: none;
+  }
+  .service-item h1 {
+    font-size: 17px;
+  }
+  .experience-text {
+    font-size: 10px;
+    display: none;
   }
   
   .login-form {
     padding: 24px 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
   }
   
   .login-form h2 {
     font-size: 24px;
   }
+  
+  .login-form > p {
+    font-size: 13px;
+    margin-bottom: 30px;
+  }
+  
+  .login-form div p {
+    font-size: 15px;
+  }
+  
+  .login-form input,
+  .login-form textarea {
+    padding: 12px 14px;
+  }
+  
+  .login-form input {
+    height: 46px;
+  }
+  
+  .login-form textarea {
+    min-height: 90px;
+  }
+  
+  .login-form button {
+    padding: 14px 18px;
+    font-size: 16px;
+  }
 }
 
-@media (max-width: 480px) {
+/* iPhone SE / 360px и меньше */
+@media (max-width: 360px) {
   .logo-main {
-    font-size: 24px;
+    font-size: 18px;
+  }
+  
+  .logo-tagline {
+    font-size: 7px;
+    letter-spacing: 0;
+  }
+  
+  .phone-number {
+    font-size: 16px;
+  }
+  
+  .phone-hours {
+    font-size: 9px;
   }
   
   .main-title {
@@ -366,19 +641,76 @@ body {
   }
   
   .service-item h1 {
-    font-size: 20px;
+    font-size: 22px;
+  }
+  
+  .login-form {
+    padding: 20px 16px;
   }
   
   .login-form h2 {
-    font-size: 20px;
+    font-size: 22px;
   }
   
   .login-form input,
   .login-form textarea {
-    padding: 12px;
+    padding: 11px 12px;
   }
   
-  .login-form textarea {
-    min-height: 80px;
+  .login-form button {
+    padding: 13px 16px;
+  }
+  
+  .success-message {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+}
+
+/* ---------- СЕНСОРНЫЕ УЛУЧШЕНИЯ ---------- */
+@media (hover: none) and (pointer: coarse) {
+  /* Убираем только transform при hover, градиент оставляем */
+  .phone-number:hover {
+    background-position: left center; /* отменяем анимацию */
+  }
+  
+  .login-form button:hover {
+    transform: none;
+    background: var(--color-primary);
+  }
+  
+  .login-form button:active {
+    transform: scale(0.98);
+    background: var(--color-primary-dark);
+  }
+  
+  /* Увеличиваем область касания */
+  .phone-number {
+    padding: 6px 0;
+    display: inline-block;
+  }
+  
+  .header-phone a,
+  .header-phone span {
+    display: inline-block;
+    padding: 2px 0;
+  }
+}
+
+/* ---------- ПОДДЕРЖКА SAFE AREA (NOTCH, DYNAMIC ISLAND) ---------- */
+@supports (padding: max(0px)) {
+  .header {
+    padding-left: max(24px, env(safe-area-inset-left));
+    padding-right: max(24px, env(safe-area-inset-right));
+  }
+  
+  .main-content {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
+  
+  .header-container {
+    padding-left: 0;
+    padding-right: 0;
   }
 }

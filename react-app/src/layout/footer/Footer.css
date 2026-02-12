@@ -1,0 +1,109 @@
+footer {
+  padding: 80px 13% 80px;
+  justify-content: center;
+  display: block;
+  
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0px, auto));
+  gap: 10rem;
+  background-color: #1a1d26;
+  margin-top: auto; /* прижимает футер к низу */
+  width: 100%;
+}
+.footer-content h2 {
+    color: white;
+    font-size: 40px;
+}
+
+.footer-content h2 span {
+    color: #FD4943;
+}
+
+
+.footer-content h4 {
+  color: #fff;
+  margin-bottom: 1.5rem;
+  font-size: 30px;
+}
+.button-lsd {
+    width: 50px;
+    height: 50px;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+.footer-content li {
+  margin-bottom: 16px;
+  list-style: none;
+}
+
+.footer-content li a {
+  display: block;
+  color: #d6d6d6;
+  font-size: 18px;
+  font-weight: 400;
+  transition: all 0.4s ease;
+  text-decoration: none;
+}
+
+.footer-content li a:hover { /* исправлено: был дубль li a */
+  transform: translateY(-3px) translateX(-5px);
+  color: #fff;
+  
+}
+
+.footer-content p {
+  color: #d6d6d6;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 20px 0;
+}
+
+.footer-content img {
+  max-width: 150px; /* добавил ограничение для лого */
+}
+
+.icons a {
+  display: inline-block;
+  font-size: 22px;
+  color: #d6d6d6;
+  margin-right: 17px;
+  transition: all 0.4s ease;
+}
+
+.icons a:hover {
+  color: #fff;
+  transform: translateY(-5px);
+}
+
+@media (max-width: 1690px) {
+  section {
+    padding: 50px 5% 40px;
+  }
+}
+
+@media (max-width: 1120px) {
+  .footer {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .footer {
+    grid-template-columns: repeat(auto-fit, minmax(150px, auto));
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .footer {
+    grid-template-columns: 1fr; /* одна колонка на мобилках */
+    text-align: center;
+  }
+  
+  .icons a {
+    margin-right: 10px;
+  }
+}

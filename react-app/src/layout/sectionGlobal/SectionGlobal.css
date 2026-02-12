@@ -1,0 +1,15 @@
+.section-global {
+    justify-content:space-around;
+    display: flex;
+    padding: 80px 20% 10px;
+}
+
+.sec-w {
+    background-color: #1a1d26;
+    
+}
+
+.section-global h1{
+    color: white;
+    font-size: 60px;
+}

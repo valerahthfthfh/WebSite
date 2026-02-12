@@ -1,140 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, push, set } from "firebase/database";
+import React, { useState } from 'react';
 
 function MainForm() {
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbwlNH38uZ50j_nHIAL1eZy6zrfiX19v56UBB3n2J0VuK_sPxZg2Pg8Dx1lD9AxaZxpd/exec';
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [botStatus, setBotStatus] = useState('unknown');
   
- 
-  const BOT_TOKEN = '8033399130:AAGI_89YLNq-FBrD5CacJK0bBSqtC7hwSdc';
-  
-  // Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyA2X7jtYJ9NvTG-KNryGPbP1eW2FNEXsEM",
-    authDomain: "dataform-a57ff.firebaseapp.com",
-    databaseURL: "https://dataform-a57ff-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "dataform-a57ff",
-    storageBucket: "dataform-a57ff.firebasestorage.app",
-    messagingSenderId: "720392117686",
-    appId: "1:720392117686:web:90506fad3007fbc103f517"
-  };
+  // URL нашего NestJS бэкенда
+  const BACKEND_URL = 'http://localhost:5000/send-request';
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
-
-  // Проверка доступности бота
-  useEffect(() => {
-    checkBotStatus();
-  }, []);
-
-  const checkBotStatus = async () => {
-    try {
-      const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getMe`);
-      if (response.ok) {
-        setBotStatus('online');
-      } else {
-        setBotStatus('offline');
-      }
-    } catch (error) {
-      setBotStatus('offline');
-    }
-  };
-
-  // Function to save data to Firebase
-  const saveToFirebase = async (name, phone, comment) => {
-    try {
-      const dataFormRef = ref(database, 'dataForm');
-      const newDataRef = push(dataFormRef);
-      
-      await set(newDataRef, {
-        name: name,
-        phone: phone,
-        comment: comment,
-        timestamp: new Date().toISOString(),
-        source: 'website_form'
-      });
-      
-      console.log('Данные сохранены в Firebase:', { name, phone, comment });
-      return true;
-    } catch (error) {
-      console.error('Ошибка при сохранении в Firebase:', error);
-      return false;
-    }
-  };
-
-  // Function to send data to Telegram via direct method
-  const sendToTelegramDirect = async (name, phone, comment) => {
-    try {
-      // Получаем список админов из вашего бота
-      // ВАЖНО: Вам нужно будет добавить в бота функцию для возврата списка админов
-      // Пока используем статический список или другой метод
-      
-      const admins = [804822685]; // Главный админ
-      // Можно расширить список, если нужно
-      
-      let sentCount = 0;
-      const errors = [];
-      
-      // Форматируем сообщение
-      const timeNow = new Date().toLocaleTimeString('ru-RU');
-      const dateNow = new Date().toLocaleDateString('ru-RU');
-      const appId = new Date().getTime();
-      
-      const message = `🔥 <b>НОВАЯ ЗАЯВКА С САЙТА 🔥 </b>
-<b></b>
-<b>ФИО:</b> ${name}
-<b>Телефон:</b> ${phone}
-<b>Комментарий:</b> ${comment || 'Не указан'}
-<b>Дата/Время:</b> ${dateNow}, ${timeNow}
-<b>ID заявки:</b> <code>${appId}</code>`;
-      
-      // Отправляем каждому админу
-      for (const adminId of admins) {
-        try {
-          const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              chat_id: adminId,
-              text: message,
-              parse_mode: 'HTML'
-            })
-          });
-          
-          const result = await response.json();
-          
-          if (result.ok) {
-            sentCount++;
-            console.log(`✅ Отправлено админу ${adminId}`);
-          } else {
-            errors.push(`Админ ${adminId}: ${result.description}`);
-          }
-        } catch (error) {
-          errors.push(`Админ ${adminId}: ${error.message}`);
-        }
-      }
-      
-      if (sentCount > 0) {
-        console.log(`📊 Отправлено ${sentCount}/${admins.length} админам`);
-        return { success: true, sentCount, errors };
-      } else {
-        console.error('❌ Не удалось отправить ни одному админу:', errors);
-        return { success: false, sentCount: 0, errors };
-      }
-      
-    } catch (error) {
-      console.error('❌ Ошибка отправки в Telegram:', error);
-      return { success: false, sentCount: 0, errors: [error.message] };
-    }
-  };
-
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -145,47 +17,42 @@ function MainForm() {
     const phone = form.phone.value.trim();
     const comment = form.comment.value.trim();
 
-    // Basic validation
+    // Базовая проверка
     if (!name || !phone) {
-      alert('Пожалуйста, заполните обязательные поля: Имя и Телефон');
-      setIsLoading(false);
-      return;
-    }
-
-    // Валидация телефона
-    const phoneRegex = /^[\d\s\-\+\(\)]+$/;
-    if (!phoneRegex.test(phone)) {
-      alert('Пожалуйста, введите корректный номер телефона');
+      alert('Пожалуйста, заполните имя и телефон');
       setIsLoading(false);
       return;
     }
 
     try {
-      // 1. Сохраняем в Firebase
-      const firebaseSuccess = await saveToFirebase(name, phone, comment);
-      
-      // 2. Отправляем в Google Sheets
-      const formData = new FormData(form);
-      const sheetsResponse = await fetch(scriptURL, {
+      // Отправляем данные в наш бэкенд
+      const response = await fetch(BACKEND_URL, {
         method: 'POST',
-        body: formData
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, phone, comment }),
       });
-      console.log('✅ Данные отправлены в Google Sheets');
-      
-      // 3. Отправляем в Telegram
-      const telegramResult = await sendToTelegramDirect(name, phone, comment);
-      
-      if (telegramResult.success) { 
+
+      const result = await response.json();
+
+      if (result.success) {
         setShowSuccess(true);
         form.reset();
         
+        // Скрываем сообщение об успехе через 5 секунд
         setTimeout(() => {
           setShowSuccess(false);
         }, 5000);
         
+        console.log('Заявка успешно отправлена:', result);
+      } else {
+        alert(result.message || 'Ошибка отправки заявки');
       }
       
     } catch (error) {
+      console.error('Ошибка при отправке:', error);
+      alert('Не удалось отправить заявку. Проверьте подключение к интернету.');
     } finally {
       setIsLoading(false);
     }
@@ -210,6 +77,11 @@ function MainForm() {
           </div>
           <div className="experience-text">
             <p>C 2012 года Устанавливаем, обслуживаем и<br /> ремонтируем оборудование. <br /> Работаем честно - как для себя.</p>
+          </div>
+
+          <div className='button-rega'>
+            <button className='button-1'>Узнать больше</button>
+            <button className='button-2'>Отправить заявку</button>
           </div>
         </section>
 
@@ -276,26 +148,8 @@ function MainForm() {
         </section>
       </div>
       
-      {/* Стили для статуса */}
+      {/* Стили */}
       <style jsx>{`
-        .bot-status {
-          margin-bottom: 15px;
-          padding: 8px 12px;
-          background: #f5f5f5;
-          border-radius: 6px;
-          font-size: 14px;
-          color: #666;
-        }
-        .status-dot {
-          margin-left: 8px;
-          font-weight: bold;
-        }
-        .status-dot.online {
-          color: #28a745;
-        }
-        .status-dot.offline {
-          color: #dc3545;
-        }
         .success-message {
           margin: 15px 0;
           padding: 12px;
