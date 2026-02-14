@@ -1,4 +1,4 @@
-/* ContactForm.css — МАКСИМАЛЬНЫЕ ОТСТУПЫ */
+/* ContactForm.css — ИСПРАВЛЕННАЯ ВЕРСИЯ */
 
 .contact-form-main {
   display: flex;
@@ -154,36 +154,36 @@
   }
 }
 
-/* ДЕСКТОП — ЗДЕСЬ ВСЕ ОТСТУПЫ */
+/* ДЕСКТОП — ИСПРАВЛЕННЫЕ ОТСТУПЫ */
 @media (min-width: 900px) {
   .contact-form-main {
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    max-width: 1600px;
-    padding: 0 80px; /* ← ОТСТУПЫ КОНТЕЙНЕРА СЛЕВА И СПРАВА */
+    justify-content: space-between;
+    max-width: 1400px;
+    padding: 0 20px; /* УМЕНЬШИЛ С 80px ДО 20px */
     margin: 0 auto;
-    gap: 150px; /* ← ГЛАВНЫЙ ОТСТУП МЕЖДУ БЛОКАМИ */
+    gap: 40px; /* УМЕНЬШИЛ С 150px ДО 40px */
   }
   
   .input-number-phone {
     flex: 1;
-    max-width: 500px;
-    padding: 80px 0 90px;
-    margin-left: 60px; /* ← ОТСТУП ЛЕВОГО БЛОКА ОТ КРАЯ */
+    max-width: 550px;
+    padding: 60px 0 70px;
+    margin-left: 0; /* УБРАЛ 60px */
   }
   
   .input-number-phone .hero-logo {
-    font-size: 38px;
+    font-size: 35px;
   }
   
   .input-number-phone .hero-title-g {
-    font-size: 46px;
+    font-size: 42px;
   }
   
   .input-number-phone p {
     font-size: 18px;
-    margin: 30px 0 45px;
+    margin: 24px 0 40px;
   }
   
   .input-number-phone p br {
@@ -191,22 +191,27 @@
   }
   
   .input-number-phone input {
-    height: 70px;
-    padding: 24px 28px;
+    height: 68px;
+    padding: 22px 26px;
   }
   
   .input-number-phone button {
-    width: 220px;
-    height: 70px;
+    width: 200px;
+    height: 68px;
     font-size: 18px;
+  }
+  
+  .input-number-phone button:hover {
+    background-color: #e7140d;
+    transform: translateY(-2px);
   }
   
   .people {
     width: 450px;
     max-width: none;
-    margin: 0 80px 0 0; /* ← ОТСТУП КАРТИНКИ СПРАВА */
+    margin: 0; /* УБРАЛ margin-right */
     align-self: flex-end;
-    transform: translateX(80px); /* ← СДВИГ КАРТИНКИ ВПРАВО */
+    transform: none; /* УБРАЛ translateX */
   }
   
   .people img {
@@ -217,50 +222,21 @@
   }
 }
 
-/* ОЧЕНЬ БОЛЬШИЕ ЭКРАНЫ — ЕЩЕ БОЛЬШЕ ОТСТУПЫ */
+/* ОЧЕНЬ БОЛЬШИЕ ЭКРАНЫ */
 @media (min-width: 1400px) {
   .contact-form-main {
-    max-width: 1800px;
-    gap: 300px; /* ← ЕЩЕ БОЛЬШЕ МЕЖДУ БЛОКАМИ */
-    padding: 0 100px;
+    max-width: 1600px;
+    gap: 60px; /* УМЕНЬШИЛ С 300px */
+    padding: 0 40px;
   }
   
   .input-number-phone {
-    max-width: 550px;
-    padding: 100px 0 110px;
-    margin-left: 100px; /* ← БОЛЬШЕ ОТСТУП СЛЕВА */
-  }
-  
-  .input-number-phone .hero-logo {
-    font-size: 42px;
-  }
-  
-  .input-number-phone .hero-title-g {
-    font-size: 52px;
+    max-width: 600px;
+    padding: 80px 0 90px;
   }
   
   .people {
     width: 500px;
-    margin-right: 120px; /* ← БОЛЬШЕ ОТСТУП СПРАВА */
-    transform: translateX(120px); /* ← БОЛЬШЕ СДВИГ ВПРАВО */
-  }
-}
-
-/* СУПЕР БОЛЬШИЕ ЭКРАНЫ */
-@media (min-width: 1800px) {
-  .contact-form-main {
-    max-width: 1900px;
-    gap: 100px; /* ← МАКСИМАЛЬНЫЙ ОТСТУП */
-    padding: 0 150px;
-  }
-  
-  .input-number-phone {
-    margin-left: 45px;
-  }
-  
-  .people {
-    margin-right: 300px;
-    transform: translateX(180px);
   }
 }
 
@@ -285,25 +261,5 @@
   
   .people img {
     margin-bottom: -4px;
-  }
-}
-
-/* iPhone SE */
-@media (max-width: 360px) {
-  .input-number-phone {
-    padding: 16px 12px 35px;
-  }
-  
-  .input-number-phone .hero-logo {
-    font-size: 24px;
-  }
-  
-  .input-number-phone .hero-title-g {
-    font-size: 26px;
-  }
-  
-  .input-number-phone p {
-    margin: 14px 0 24px;
-    font-size: 15px;
   }
 }
