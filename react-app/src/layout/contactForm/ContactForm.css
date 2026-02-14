@@ -1,57 +1,73 @@
+/* ContactForm.css — МАКСИМАЛЬНЫЕ ОТСТУПЫ */
+
 .contact-form-main {
   display: flex;
-  justify-content: space-between; /* вместо space-evenly */
-  align-items: center; /* выравнивание по центру */
-  gap: 500px; /* расстояние между блоками */
-  max-width: 1800px;
-  margin: 0 auto;
-
+  flex-direction: column;
+  gap: 0;
+  max-width: 100%;
+  padding: 0;
 }
 
 .input-number-phone {
-  flex: 1; /* занимает доступное пространство */
-  max-width: 1700px;
-}
-
-.people {
-  width: 450px; /* уменьшил */
-  height: auto; /* убрал фиксированную высоту */
-  display: flex;
-  justify-content: flex-end;
-}
-
-.people img {
   width: 100%;
-  height: auto;
-  object-fit: contain;
+  padding: 24px 16px 40px;
+  background: white;
+}
+
+.input-number-phone .hero-text {
+  margin-bottom: 16px;
+}
+
+.input-number-phone .hero-logo {
+  font-size: 26px;
+  font-weight: 700;
+  color: #2F3542;
+  margin-bottom: 4px;
+}
+
+.input-number-phone .hero-logo span {
+  color: #FD4943;
+}
+
+.input-number-phone .hero-title-g {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2F3542;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.input-number-phone .hero-title-g span {
+  color: #FD4943;
 }
 
 .input-number-phone p {
-  margin-top: 20px;
-  margin-bottom: 30px;
-  font-size: 18px;
+  margin: 16px 0 32px;
+  font-size: 16px;
   color: #7D8694;
   line-height: 1.5;
 }
 
+.input-number-phone p br {
+  display: none;
+}
+
 .fff {
   display: flex;
-  gap: 15px;
-  margin-top: 20px;
+  flex-direction: column;
+  gap: 12px;
   width: 100%;
+  margin-top: 8px;
 }
 
 .input-number-phone input {
-  flex: 1;
-  padding: 16px 20px; /* убрал огромные padding-right/padding-bottom */
+  width: 100%;
+  padding: 18px 20px;
   border: 2px solid #E0E4E9;
-  border-radius: 12px;
-  font-size: 18px;
-  transition: all 0.2s ease;
-  box-sizing: border-box;
-  background-color: white;
-  color: #2F3542;
+  border-radius: 16px;
+  font-size: 16px;
   height: 60px;
+  background: white;
 }
 
 .input-number-phone input:focus {
@@ -60,96 +76,234 @@
 }
 
 .input-number-phone button {
-  width: 160px; /* фиксированная ширина */
+  width: 100%;
+  height: 60px;
   border: none;
-  padding: 0 20px;
   background-color: #FD4943;
   color: white;
-  border-radius: 12px; /* уменьшил */
-  font-size: 18px;
+  border-radius: 16px;
+  font-size: 16px;
   font-weight: 600;
-  height: 60px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
+  transition: all 0.2s ease;
 }
 
-/* Адаптация */
-@media (max-width: 1200px) {
-  .contact-form-main {
-    padding: 30px 20px;
-    gap: 30px;
-  }
-  
-  .people {
-    width: 380px;
-  }
+.input-number-phone button:active {
+  transform: scale(0.98);
+  background-color: #e7140d;
 }
 
-@media (max-width: 992px) {
+.people {
+  width: 100%;
+  line-height: 0;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.people img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin-bottom: -4px;
+}
+
+/* Планшеты */
+@media (min-width: 600px) {
   .contact-form-main {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .input-number-phone {
-    max-width: 100%;
-  }
-  
-  .people {
-    width: 100%;
-    max-width: 450px;
+    max-width: 600px;
     margin: 0 auto;
   }
   
-  .fff {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-logo {
-    font-size: 40px;
+  .input-number-phone {
+    padding: 40px 24px 50px;
   }
   
-  .hero-title-g {
-    font-size: 30px;
-  }
-  
-  .input-number-phone p {
-    font-size: 16px;
-  }
-  
-  .fff {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .input-number-phone input,
-  .input-number-phone button {
-    width: 100%;
-    max-width: 100%;
-  }
-  
-  .input-number-phone button {
-    margin-left: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .contact-form-main {
-    padding: 20px 15px;
-  }
-  
-  .hero-logo {
+  .input-number-phone .hero-logo {
     font-size: 32px;
   }
   
-  .hero-title-g {
-    font-size: 24px;
+  .input-number-phone .hero-title-g {
+    font-size: 36px;
+  }
+  
+  .input-number-phone p {
+    margin: 20px 0 36px;
+  }
+  
+  .fff {
+    flex-direction: row;
+    gap: 16px;
+  }
+  
+  .input-number-phone input {
+    flex: 1;
+    height: 64px;
+    padding: 20px 24px;
+  }
+  
+  .input-number-phone button {
+    width: 180px;
+    height: 64px;
   }
   
   .people {
-    max-width: 300px;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+}
+
+/* ДЕСКТОП — ЗДЕСЬ ВСЕ ОТСТУПЫ */
+@media (min-width: 900px) {
+  .contact-form-main {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    max-width: 1600px;
+    padding: 0 80px; /* ← ОТСТУПЫ КОНТЕЙНЕРА СЛЕВА И СПРАВА */
+    margin: 0 auto;
+    gap: 150px; /* ← ГЛАВНЫЙ ОТСТУП МЕЖДУ БЛОКАМИ */
+  }
+  
+  .input-number-phone {
+    flex: 1;
+    max-width: 500px;
+    padding: 80px 0 90px;
+    margin-left: 60px; /* ← ОТСТУП ЛЕВОГО БЛОКА ОТ КРАЯ */
+  }
+  
+  .input-number-phone .hero-logo {
+    font-size: 38px;
+  }
+  
+  .input-number-phone .hero-title-g {
+    font-size: 46px;
+  }
+  
+  .input-number-phone p {
+    font-size: 18px;
+    margin: 30px 0 45px;
+  }
+  
+  .input-number-phone p br {
+    display: inline;
+  }
+  
+  .input-number-phone input {
+    height: 70px;
+    padding: 24px 28px;
+  }
+  
+  .input-number-phone button {
+    width: 220px;
+    height: 70px;
+    font-size: 18px;
+  }
+  
+  .people {
+    width: 450px;
+    max-width: none;
+    margin: 0 80px 0 0; /* ← ОТСТУП КАРТИНКИ СПРАВА */
+    align-self: flex-end;
+    transform: translateX(80px); /* ← СДВИГ КАРТИНКИ ВПРАВО */
+  }
+  
+  .people img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: -4px;
+  }
+}
+
+/* ОЧЕНЬ БОЛЬШИЕ ЭКРАНЫ — ЕЩЕ БОЛЬШЕ ОТСТУПЫ */
+@media (min-width: 1400px) {
+  .contact-form-main {
+    max-width: 1800px;
+    gap: 300px; /* ← ЕЩЕ БОЛЬШЕ МЕЖДУ БЛОКАМИ */
+    padding: 0 100px;
+  }
+  
+  .input-number-phone {
+    max-width: 550px;
+    padding: 100px 0 110px;
+    margin-left: 100px; /* ← БОЛЬШЕ ОТСТУП СЛЕВА */
+  }
+  
+  .input-number-phone .hero-logo {
+    font-size: 42px;
+  }
+  
+  .input-number-phone .hero-title-g {
+    font-size: 52px;
+  }
+  
+  .people {
+    width: 500px;
+    margin-right: 120px; /* ← БОЛЬШЕ ОТСТУП СПРАВА */
+    transform: translateX(120px); /* ← БОЛЬШЕ СДВИГ ВПРАВО */
+  }
+}
+
+/* СУПЕР БОЛЬШИЕ ЭКРАНЫ */
+@media (min-width: 1800px) {
+  .contact-form-main {
+    max-width: 1900px;
+    gap: 100px; /* ← МАКСИМАЛЬНЫЙ ОТСТУП */
+    padding: 0 150px;
+  }
+  
+  .input-number-phone {
+    margin-left: 45px;
+  }
+  
+  .people {
+    margin-right: 300px;
+    transform: translateX(180px);
+  }
+}
+
+/* Маленькие телефоны */
+@media (max-width: 480px) {
+  .input-number-phone {
+    padding: 20px 16px 40px;
+  }
+  
+  .input-number-phone p {
+    margin: 16px 0 28px;
+  }
+  
+  .input-number-phone input {
+    padding: 16px 18px;
+    height: 56px;
+  }
+  
+  .input-number-phone button {
+    height: 56px;
+  }
+  
+  .people img {
+    margin-bottom: -4px;
+  }
+}
+
+/* iPhone SE */
+@media (max-width: 360px) {
+  .input-number-phone {
+    padding: 16px 12px 35px;
+  }
+  
+  .input-number-phone .hero-logo {
+    font-size: 24px;
+  }
+  
+  .input-number-phone .hero-title-g {
+    font-size: 26px;
+  }
+  
+  .input-number-phone p {
+    margin: 14px 0 24px;
+    font-size: 15px;
   }
 }

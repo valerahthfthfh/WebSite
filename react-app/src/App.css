@@ -5,20 +5,25 @@
   --color-gray: #B1BBC7;
   --color-light-gray: #F3F4F7;
   --color-gray-description: #7D8694;
+  --safe-area-top: env(safe-area-inset-top);
+  --safe-area-bottom: env(safe-area-inset-bottom);
 }
+
+
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background: white;
   color: var(--color-black);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.4;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 .App {
@@ -27,7 +32,25 @@ body {
   flex-direction: column;
 }
 
-/* ---------- HEADER ---------- */
+/* ---------- ГЛОБАЛЬНЫЕ КОНТЕЙНЕРЫ (ДЛЯ ВСЕХ БЛОКОВ) ---------- */
+.container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Для всех секций внутри container */
+.container .hero,
+.container .features,
+.container .contact-form-main,
+.container .Data {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- HEADER (Mobile First) ---------- */
 .header {
   background: white;
   border-bottom: 3px solid var(--color-light-gray);
@@ -37,29 +60,29 @@ body {
 }
 
 .header-container {
-  max-width: 1500px;
-  margin: 0 auto;
-  padding: 30px 24px;
+  padding: 16px 20px;
+  padding-top: max(16px, var(--safe-area-top));
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 100%;
 }
 
 .logo {
   display: flex;
   flex-direction: column;
-  line-height: 1;
 }
 
 .logo-main {
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--color-black);
-  letter-spacing: -0.7px;
+  letter-spacing: -0.5px;
+  line-height: 1;
   display: flex;
   align-items: baseline;
   gap: 2px;
-  padding-bottom: 10px;
+  padding-bottom: 4px;
 }
 
 .logo-main span {
@@ -67,12 +90,12 @@ body {
 }
 
 .logo-tagline {
-  font-size: 13px;
+  font-size: 10px;
   font-weight: 700;
   color: var(--color-gray-description);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-top: 2px;
+  letter-spacing: 0.3px;
+  margin-top: 0;
 }
 
 .header-phone {
@@ -82,184 +105,172 @@ body {
 }
 
 .phone-number {
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 700;
   text-decoration: none;
-  transition: background-position 0.3s ease;
-  color: transparent;
+  color: var(--color-black);
+  line-height: 1.2;
+  padding: 4px 0;
   background: linear-gradient(to right, #181a1f, #ff0800);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-size: 100% auto;
-  background-position: left center;
-}
-
-.phone-number:hover {
-  background-position: right center;
 }
 
 .phone-hours {
-  font-size: 16px;
+  font-size: 11px;
   color: var(--color-gray-description);
-  margin-top: 2px;
 }
 
-/* ---------- MAIN CONTENT ---------- */
+/* ---------- MAIN CONTENT (Mobile First) ---------- */
 .main-content {
   flex: 1;
-  padding: 40px 20px 10%;
+  padding: 20px 16px 30px;
+  padding-bottom: max(30px, var(--safe-area-bottom));
 }
 
 .content-container {
-  max-width: 1500px;
-  margin: 0 auto;
   display: flex;
-  gap: 40px;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 100%;
 }
 
-/* Левая часть */
+/* Левая часть - компактная как в приложении */
 .info-section {
-  flex: 1;
-  padding: 24px;
-  padding-top: 80px;
+  padding: 10px 0 0;
 }
 
 .main-title {
-  font-size: 58px;
+  font-size: 28px;
   font-weight: 700;
   color: var(--color-black);
-  margin-bottom: 15px;
-  line-height: 1.1;
-  letter-spacing: -1px;
+  margin-bottom: 8px;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
 }
 
 .services-list {
-  margin-bottom: 15px;
-}
-
-.service-item {
-  margin-bottom: 15px;
-}
-
-.service-item h1 {
-  font-weight: 700;
-  margin: 0;
-  line-height: 1.2;
-}
-
-.experience-text {
-  font-size: 25px;
-  color: var(--color-gray-description);
-  line-height: 1.6;
-}
-
-.experience-text p {
   margin-bottom: 10px;
 }
 
-/* Правая часть - форма */
+.service-item {
+  margin-bottom: 4px;
+}
+
+.service-item h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-gray-description);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.experience-text {
+  font-size: 15px;
+  color: var(--color-gray-description);
+  line-height: 1.4;
+  margin: 16px 0 20px;
+}
+
+.experience-text p {
+  margin-bottom: 0;
+}
+
+.experience-text br {
+  display: none;
+}
+
+/* Кнопки действий */
+.button-rega {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  padding-right: 0;
+}
+
+.button-1, .button-2 {
+  flex: 1;
+  border: none;
+  padding: 14px 12px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+}
+
+.button-1 {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.button-2 {
+  background-color: var(--color-black);
+  color: white;
+}
+
+.button-1:active, .button-2:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+/* Форма - оптимизирована под одну руку */
 .form-section {
-  flex: 0 0 482px;
+  width: 100%;
 }
 
 .login-form {
   background: white;
-  padding: 43px;
+  padding: 28px 20px;
   border-radius: 20px;
-  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
   width: 100%;
 }
 
 .login-form h2 {
-  margin: 0 0 10px 0;
-  font-size: 30px;
-  color: var(--color-black);
+  font-size: 26px;
   font-weight: 700;
+  color: var(--color-black);
   text-align: center;
-  line-height: 1.3;
+  margin: 0 0 4px 0;
   letter-spacing: -0.5px;
+  line-height: 1.3;
 }
 
 .login-form > p {
-  margin: 0 0 63px 0;
+  font-size: 14px;
   color: var(--color-gray-description);
-  font-size: 15px;
-  line-height: 1.5;
   text-align: center;
+  margin: 0 0 24px 0;
   font-weight: 600;
 }
 
 .login-form div {
-  margin-bottom: 36px;
-}
-
-.button-rega {
-  margin-top: 60px;
-  padding-right: 60px;
-}
-
-.button-1 {
-  border-style: none;
-  background-color: #FD4943;
-  color: white;
-  padding: 23px;
-  font-size: 20px;
-  border-radius: 100px;
-  margin-right: 27px;
-  font-weight: 900px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.1);
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
-.button-2 {
-  border-style: none;
-  background-color: #2F3542;
-  color: white;
-  padding: 23px;
-  font-size: 20px;
-  border-radius: 100px;
-  font-weight: 900px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  padding-left: 30px;
-  padding-right: 30px;
-  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.1);
-}
-
-.button-1:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 20px 70px rgba(1, 0, 15, 0.15);
-}
-
-.button-2:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 20px 70px rgba(1, 0, 15, 0.15);
+  margin-bottom: 20px;
 }
 
 .login-form div p {
-  margin: 0 0 8px 0;
+  font-size: 15px;
   font-weight: 700;
   color: var(--color-black);
-  font-size: 17px;
-  display: block;
+  margin: 0 0 6px 0;
+  padding-left: 4px;
 }
 
 .login-form input,
 .login-form textarea {
   width: 100%;
-  padding: 17px;
+  padding: 14px 16px;
   border: 2px solid var(--color-light-gray);
   border-radius: 12px;
-  font-size: 17px;
+  font-size: 16px;
   transition: all 0.2s ease;
-  box-sizing: border-box;
-  background-color: white;
+  background: white;
   color: var(--color-gray-description);
+  -webkit-appearance: none;
   appearance: none;
 }
 
@@ -267,7 +278,7 @@ body {
 .login-form textarea:focus {
   outline: none;
   border-color: var(--color-primary);
-  background-color: white;
+  background: white;
   color: var(--color-black);
 }
 
@@ -276,32 +287,22 @@ body {
   color: var(--color-gray-description);
   font-weight: 400;
   opacity: 0.8;
+  font-size: 14px;
 }
 
 .login-form input {
-  height: 52px;
-  text-align: left;
+  height: 48px;
 }
 
 .login-form textarea {
-  min-height: 110px;
-  line-height: 1.5;
+  min-height: 90px;
   resize: vertical;
-  overflow-y: auto;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  text-align: left;
-  vertical-align: top;
-  display: block;
-}
-
-.login-form textarea::-webkit-resizer {
-  display: none;
+  line-height: 1.5;
 }
 
 .login-form button {
   width: 100%;
-  padding: 16px 24px;
+  padding: 16px 20px;
   background: var(--color-primary);
   color: white;
   border: none;
@@ -314,29 +315,59 @@ body {
   letter-spacing: 0.5px;
 }
 
-.login-form button:hover {
-  background: var(--color-primary-dark);
-  transform: translateY(-2px);
-}
-
 .login-form button:active {
-  transform: translateY(0);
+  transform: scale(0.98);
+  background: var(--color-primary-dark);
 }
 
-/* ---------- СОСТОЯНИЯ ФОРМЫ (из React-компонента) ---------- */
+/* Сообщение об успехе */
 .success-message {
-  margin: 15px 0 25px;
-  padding: 16px 20px;
-  background: #e8f5e9;
-  color: #2e7d32;
-  border: 1px solid #a5d6a7;
+  margin: 15px 0 10px;
+  padding: 14px 16px;
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
   border-radius: 12px;
   text-align: center;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.5;
 }
 
+/* Кнопка наверх */
+.to-top-btn {
+  position: fixed;
+  right: 15px;
+  bottom: 20px;
+  width: 56px;
+  height: 56px;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(253, 73, 67, 0.3);
+}
+
+.to-top-btn.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.to-top-btn:active {
+  transform: scale(0.9);
+  background: #e63e38;
+}
+
+/* Состояния загрузки */
 button.loading,
 button:disabled {
   opacity: 0.7;
@@ -344,42 +375,8 @@ button:disabled {
   transform: none !important;
 }
 
-button:disabled:hover {
-  background: var(--color-primary);
-  transform: none;
-}
-
-/* ---------- МОБИЛЬНАЯ АДАПТАЦИЯ (ТОЛЬКО НУЖНОЕ) ---------- */
-
-/* Планшеты и небольшие ноутбуки */
-@media (max-width: 1024px) {
-  .content-container {
-    flex-direction: column;
-    gap: 40px;
-  }
-  
-  .form-section {
-    flex: 1;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  .main-title {
-    font-size: 48px;
-  }
-  
-  .service-item h1 {
-    font-size: 32px;
-  }
-
-  .info-section {
-    padding-top: 40px;
-  }
-}
-
-/* Между 900px и 769px — шапка всё ещё в строку */
-@media (max-width: 900px) {
+/* ---------- ПЛАНШЕТЫ (от 600px) ---------- */
+@media (min-width: 600px) {
   .header-container {
     padding: 20px 24px;
   }
@@ -394,31 +391,6 @@ button:disabled:hover {
   }
   
   .phone-number {
-    font-size: 22px;
-  }
-  
-  .phone-hours {
-    font-size: 13px;
-  }
-}
-
-/* Планшеты вертикальные */
-@media (max-width: 768px) {
-  .header-container {
-    padding: 18px 20px;
-    /* остаёмся в строке, не колонка! */
-  }
-  
-  .logo-main {
-    font-size: 24px;
-    padding-bottom: 4px;
-  }
-  
-  .logo-tagline {
-    font-size: 10px;
-  }
-  
-  .phone-number {
     font-size: 20px;
   }
   
@@ -427,28 +399,24 @@ button:disabled:hover {
   }
   
   .main-content {
-    padding: 30px 20px 40px;
+    padding: 30px 24px 40px;
   }
   
   .main-title {
-    font-size: 40px;
-    text-align: left; /* или center — на ваше усмотрение, я оставил left */
+    font-size: 32px;
   }
   
   .service-item h1 {
-    font-size: 28px;
-    text-align: left;
+    font-size: 22px;
   }
   
   .experience-text {
-    text-align: left;
-    font-size: 18px;
+    font-size: 16px;
   }
   
-  .info-section {
-    padding-top: 20px;
-    padding-left: 0;
-    padding-right: 0;
+  .button-1, .button-2 {
+    padding: 16px 20px;
+    font-size: 16px;
   }
   
   .login-form {
@@ -458,259 +426,294 @@ button:disabled:hover {
   .login-form h2 {
     font-size: 28px;
   }
-  
-  .login-form div {
-    margin-bottom: 28px;
-  }
 }
 
-/* Телефоны (горизонтальные и большие) */
-@media (max-width: 600px) {
+/* ---------- ДЕСКТОП (от 900px) - возвращаем оригинальную структуру ---------- */
+@media (min-width: 900px) {
+  /* Глобальное выравнивание для всех блоков на десктопе */
+  .container {
+    padding: 0 40px; /* Добавляем отступы по бокам */
+  }
+  
   .header-container {
-    padding: 16px 16px;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 30px 24px;
   }
   
   .logo-main {
-    font-size: 22px;
+    font-size: 30px;
+    padding-bottom: 10px;
   }
   
   .logo-tagline {
-    font-size: 9px;
-    white-space: nowrap;
-  }
-  
-  .phone-number {
-    font-size: 18px;
-  }
-  
-  .phone-hours {
-    font-size: 11px;
-  }
-  
-  .main-title {
-    font-size: 36px;
-  }
-  
-  .service-item h1 {
-    font-size: 26px;
-  }
-  
-  .experience-text {
-    font-size: 17px;
-  }
-  
-  .login-form {
-    padding: 28px 24px;
-  }
-  
-  .login-form h2 {
-    font-size: 26px;
-  }
-  
-  .login-form > p {
-    margin-bottom: 40px;
-  }
-  
-  .login-form div p {
-    font-size: 16px;
-  }
-  
-  .login-form input,
-  .login-form textarea {
-    padding: 14px 16px;
-    font-size: 16px; /* Защита от зума */
-    border-width: 1.5px;
-  }
-  
-  .login-form input {
-    height: 48px;
-  }
-  
-  .login-form textarea {
-    min-height: 100px;
-  }
-  
-  .login-form button {
-    padding: 15px 20px;
-    font-size: 17px;
-  }
-  
-  .success-message {
-    padding: 14px 18px;
-    font-size: 14px;
-  }
-}
-
-/* Маленькие телефоны (до 480px) */
-@media (max-width: 480px) {
-  .header-container {
-    padding: 14px 12px;
-    
-  }
-  
-  .logo-main {
-    font-size: 20px;
-  }
-  
-  .logo-tagline {
-    font-size: 8px;
-  }
-  
-  .phone-number {
-    font-size: 17px;
-  }
-  
-  .phone-hours {
-    font-size: 10px;
-  }
-  
-  .main-title {
-    font-size: 17px;
-    display: none;
-  }
-
-  .info-section {
-    display: none;
-  }
-  .service-item h1 {
-    font-size: 17px;
-  }
-  .experience-text {
-    font-size: 10px;
-    display: none;
-  }
-  
-  .login-form {
-    padding: 24px 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-  }
-  
-  .login-form h2 {
-    font-size: 24px;
-  }
-  
-  .login-form > p {
-    font-size: 13px;
-    margin-bottom: 30px;
-  }
-  
-  .login-form div p {
-    font-size: 15px;
-  }
-  
-  .login-form input,
-  .login-form textarea {
-    padding: 12px 14px;
-  }
-  
-  .login-form input {
-    height: 46px;
-  }
-  
-  .login-form textarea {
-    min-height: 90px;
-  }
-  
-  .login-form button {
-    padding: 14px 18px;
-    font-size: 16px;
-  }
-}
-
-/* iPhone SE / 360px и меньше */
-@media (max-width: 360px) {
-  .logo-main {
-    font-size: 18px;
-  }
-  
-  .logo-tagline {
-    font-size: 7px;
-    letter-spacing: 0;
-  }
-  
-  .phone-number {
-    font-size: 16px;
-  }
-  
-  .phone-hours {
-    font-size: 9px;
-  }
-  
-  .main-title {
-    font-size: 28px;
-  }
-  
-  .service-item h1 {
-    font-size: 22px;
-  }
-  
-  .login-form {
-    padding: 20px 16px;
-  }
-  
-  .login-form h2 {
-    font-size: 22px;
-  }
-  
-  .login-form input,
-  .login-form textarea {
-    padding: 11px 12px;
-  }
-  
-  .login-form button {
-    padding: 13px 16px;
-  }
-  
-  .success-message {
-    padding: 12px 16px;
     font-size: 13px;
   }
-}
-
-/* ---------- СЕНСОРНЫЕ УЛУЧШЕНИЯ ---------- */
-@media (hover: none) and (pointer: coarse) {
-  /* Убираем только transform при hover, градиент оставляем */
-  .phone-number:hover {
-    background-position: left center; /* отменяем анимацию */
-  }
   
-  .login-form button:hover {
-    transform: none;
-    background: var(--color-primary);
-  }
-  
-  .login-form button:active {
-    transform: scale(0.98);
-    background: var(--color-primary-dark);
-  }
-  
-  /* Увеличиваем область касания */
   .phone-number {
-    padding: 6px 0;
-    display: inline-block;
+    font-size: 25px;
   }
   
-  .header-phone a,
-  .header-phone span {
-    display: inline-block;
-    padding: 2px 0;
-  }
-}
-
-/* ---------- ПОДДЕРЖКА SAFE AREA (NOTCH, DYNAMIC ISLAND) ---------- */
-@supports (padding: max(0px)) {
-  .header {
-    padding-left: max(24px, env(safe-area-inset-left));
-    padding-right: max(24px, env(safe-area-inset-right));
+  .phone-hours {
+    font-size: 16px;
   }
   
   .main-content {
-    padding-left: max(20px, env(safe-area-inset-left));
-    padding-right: max(20px, env(safe-area-inset-right));
+    padding: 40px 20px 10%;
+  }
+  
+  .content-container {
+    flex-direction: row;
+    max-width: 1500px;
+    margin: 0 auto;
+    gap: 40px;
+    align-items: flex-start;
+  }
+  
+  .info-section {
+    flex: 1;
+    padding: 80px 24px 24px;
+  }
+  
+  .main-title {
+    font-size: 58px;
+    margin-bottom: 15px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+  
+  .service-item {
+    margin-bottom: 15px;
+  }
+  
+  .service-item h1 {
+    font-size: 58px;
+    font-weight: 700;
+    color: var(--color-black);
+  }
+  
+  .experience-text {
+    font-size: 25px;
+    line-height: 1.6;
+  }
+  
+  .experience-text br {
+    display: inline;
+  }
+  
+  .button-rega {
+    margin-top: 60px;
+    padding-right: 60px;
+    display: block;
+  }
+  
+  .button-1, .button-2 {
+    display: inline-block;
+    width: auto;
+    padding: 23px 30px;
+    font-size: 20px;
+    margin-right: 27px;
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.1);
+  }
+  
+  .button-1 {
+    margin-right: 27px;
+  }
+  
+  .button-2 {
+    margin-right: 0;
+  }
+  
+  .button-1:hover, .button-2:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 70px rgba(1, 0, 15, 0.15);
+  }
+  
+  .form-section {
+    flex: 0 0 482px;
+  }
+  
+  .login-form {
+    padding: 43px;
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.35);
+  }
+  
+  .login-form h2 {
+    font-size: 30px;
+    margin: 0 0 10px 0;
+  }
+  
+  .login-form > p {
+    font-size: 15px;
+    margin: 0 0 63px 0;
+  }
+  
+  .login-form div {
+    margin-bottom: 36px;
+  }
+  
+  .login-form div p {
+    font-size: 17px;
+    margin: 0 0 8px 0;
+  }
+  
+  .login-form input,
+  .login-form textarea {
+    padding: 17px;
+    font-size: 17px;
+    border-width: 2px;
+  }
+  
+  .login-form input {
+    height: 52px;
+  }
+  
+  .login-form textarea {
+    min-height: 110px;
+  }
+  
+  .login-form button {
+    padding: 16px 24px;
+    font-size: 16px;
+    margin-top: 8px;
+  }
+  
+  .login-form button:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+  }
+  
+  .login-form button:active {
+    transform: translateY(0);
+  }
+  
+  .to-top-btn {
+    width: 80px;
+    height: 80px;
+    right: 15px;
+    bottom: 120px;
+    font-size: 24px;
+  }
+  
+  .to-top-btn:hover {
+    background: #e63e38;
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(253, 73, 67, 0.4);
+  }
+}
+
+/* ---------- БОЛЬШИЕ ЭКРАНЫ ---------- */
+@media (min-width: 1200px) {
+  .service-item h1 {
+    font-size: 58px;
+  }
+  
+  /* Увеличиваем отступы на больших экранах */
+  .container {
+    padding: 0 60px;
+  }
+}
+
+/* Супер большие экраны */
+@media (min-width: 1600px) {
+  .container {
+    padding: 0 80px;
+  }
+}
+
+/* ---------- УЛУЧШЕНИЯ ДЛЯ iOS ---------- */
+@supports (padding: max(0px)) {
+  .header {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
   }
   
   .header-container {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+  
+  .main-content {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+  
+  .container {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+}
+
+/* Защита от зума на iOS */
+@media (max-width: 480px) {
+  input, textarea, select, button {
+    font-size: 16px !important;
+  }
+}
+
+/* Сенсорные улучшения */
+@media (hover: none) and (pointer: coarse) {
+  .button-1, .button-2, 
+  .login-form button,
+  .phone-number {
+    cursor: default;
+    -webkit-tap-highlight-color: rgba(253, 73, 67, 0.1);
+  }
+  
+  .button-1:hover, .button-2:hover,
+  .login-form button:hover,
+  .phone-number:hover {
+    transform: none;
+    background-position: left center;
+  }
+}
+
+@media (max-width: 480px) {
+  input, textarea, select, button, 
+  .cta-button, .cta-button-sec,
+  .feature-link a {
+    font-size: 16px !important;
+  }
+}
+
+/* Touch-оптимизация */
+@media (hover: none) and (pointer: coarse) {
+  .feature-block:active,
+  .feature:active {
+    transform: scale(0.99);
+    background: #F8F9FA;
+  }
+  
+  .button-sec:active {
+    transform: scale(0.98);
+  }
+  
+  .input-number-phone button:active {
+    transform: scale(0.98);
+    background-color: #e7140d;
+  }
+}
+
+/* Safe Area для iPhone */
+@supports (padding: max(0px)) {
+  .hero, .features, .contact-form-main, .Data {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+}
+
+/* Скрываем Jivo чат на мобильных устройствах */
+@media (max-width: 768px) {
+  .jivo-site-wrapper,
+  .jivo-mobile-wrapper,
+  .jivo-button-wrapper,
+  .jivo-container-mobile,
+  .jivo-container,
+  [class*="jivo"] iframe,
+  [id^="jivo"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 }

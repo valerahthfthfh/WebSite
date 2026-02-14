@@ -1,15 +1,155 @@
-.section-global {
-    justify-content:space-around;
-    display: flex;
-    padding: 80px 20% 10px;
-}
+/* SectionGlobal.css — ИСПРАВЛЕННАЯ ВЕРСИЯ */
 
 .sec-w {
-    background-color: #1a1d26;
-    
+  background-color: #1a1d26;
+  width: 100%;
+  overflow: hidden;
 }
 
-.section-global h1{
-    color: white;
+.section-global {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 20px;
+  max-width: 100%;
+}
+
+.section-global h1 {
+  color: white;
+  font-size: 42px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+
+.button-lsde {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* Делает иконки белыми, если они темные */
+  opacity: 0.9;
+  transition: transform 0.2s ease;
+}
+
+/* Для сенсорных устройств */
+.button-lsde:active {
+  transform: scale(0.95);
+}
+
+/* Планшеты (от 600px) */
+@media (min-width: 600px) {
+  .section-global {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 50px 30px;
+  }
+  
+  .section-global h1 {
+    font-size: 48px;
+  }
+  
+  .button-lsde {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/* Десктоп (от 900px) */
+@media (min-width: 900px) {
+  .section-global {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    padding: 80px 15% 10px;
+    gap: 0;
+  }
+  
+  .section-global h1 {
     font-size: 60px;
+    white-space: nowrap;
+  }
+  
+  .button-lsde {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .button-lsde:hover {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Очень большие экраны */
+@media (min-width: 1400px) {
+  .section-global {
+    padding: 100px 20% 20px;
+  }
+  
+  .section-global h1 {
+    font-size: 70px;
+  }
+  
+  .button-lsde {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+/* Маленькие телефоны (до 480px) */
+@media (max-width: 480px) {
+  .section-global h1 {
+    font-size: 36px;
+  }
+  
+  .button-lsde {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .section-global {
+    padding: 30px 16px;
+    gap: 16px;
+  }
+}
+
+/* iPhone SE / 360px */
+@media (max-width: 360px) {
+  .section-global h1 {
+    font-size: 32px;
+  }
+  
+  .button-lsde {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .section-global {
+    gap: 12px;
+    padding: 25px 12px;
+  }
+}
+
+/* Touch-оптимизация */
+@media (hover: none) and (pointer: coarse) {
+  .button-lsde:hover {
+    transform: none;
+  }
+  
+  .button-lsde:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Safe Area */
+@supports (padding: max(0px)) {
+  .section-global {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
 }
