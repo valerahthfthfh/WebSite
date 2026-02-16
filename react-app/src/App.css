@@ -9,8 +9,6 @@
   --safe-area-bottom: env(safe-area-inset-bottom);
 }
 
-
-
 * {
   margin: 0;
   padding: 0;
@@ -32,24 +30,7 @@ body {
   flex-direction: column;
 }
 
-/* ---------- ГЛОБАЛЬНЫЕ КОНТЕЙНЕРЫ (ДЛЯ ВСЕХ БЛОКОВ) ---------- */
-.container {
-  width: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 0;
-}
-
-/* Для всех секций внутри container */
-.container .hero,
-.container .features,
-.container .contact-form-main,
-.container .Data {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-/* ---------- HEADER (Mobile First) ---------- */
+/* ---------- HEADER ---------- */
 .header {
   background: white;
   border-bottom: 3px solid var(--color-light-gray);
@@ -180,7 +161,6 @@ body {
   display: none;
 }
 
-/* Кнопки действий */
 .button-rega {
   display: flex;
   gap: 12px;
@@ -427,13 +407,8 @@ button:disabled {
   }
 }
 
-/* ---------- ДЕСКТОП (от 900px) - возвращаем оригинальную структуру ---------- */
+/* ---------- ДЕСКТОП (от 900px) ---------- */
 @media (min-width: 900px) {
-  /* Глобальное выравнивание для всех блоков на десктопе */
-  .container {
-    padding: 0 40px; /* Добавляем отступы по бокам */
-  }
-  
   .header-container {
     max-width: 1500px;
     margin: 0 auto;
@@ -606,18 +581,6 @@ button:disabled {
   .service-item h1 {
     font-size: 58px;
   }
-  
-  /* Увеличиваем отступы на больших экранах */
-  .container {
-    padding: 0 60px;
-  }
-}
-
-/* Супер большие экраны */
-@media (min-width: 1600px) {
-  .container {
-    padding: 0 80px;
-  }
 }
 
 /* ---------- УЛУЧШЕНИЯ ДЛЯ iOS ---------- */
@@ -635,11 +598,6 @@ button:disabled {
   .main-content {
     padding-left: max(16px, env(safe-area-inset-left));
     padding-right: max(16px, env(safe-area-inset-right));
-  }
-  
-  .container {
-    padding-left: max(0px, env(safe-area-inset-left));
-    padding-right: max(0px, env(safe-area-inset-right));
   }
 }
 
@@ -663,41 +621,6 @@ button:disabled {
   .login-form button:hover,
   .phone-number:hover {
     transform: none;
-    background-position: left center;
-  }
-}
-
-@media (max-width: 480px) {
-  input, textarea, select, button, 
-  .cta-button, .cta-button-sec,
-  .feature-link a {
-    font-size: 16px !important;
-  }
-}
-
-/* Touch-оптимизация */
-@media (hover: none) and (pointer: coarse) {
-  .feature-block:active,
-  .feature:active {
-    transform: scale(0.99);
-    background: #F8F9FA;
-  }
-  
-  .button-sec:active {
-    transform: scale(0.98);
-  }
-  
-  .input-number-phone button:active {
-    transform: scale(0.98);
-    background-color: #e7140d;
-  }
-}
-
-/* Safe Area для iPhone */
-@supports (padding: max(0px)) {
-  .hero, .features, .contact-form-main, .Data {
-    padding-left: max(16px, env(safe-area-inset-left));
-    padding-right: max(16px, env(safe-area-inset-right));
   }
 }
 

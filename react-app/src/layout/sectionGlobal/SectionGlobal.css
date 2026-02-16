@@ -1,5 +1,3 @@
-/* SectionGlobal.css — ИСПРАВЛЕННАЯ ВЕРСИЯ */
-
 .sec-w {
   background-color: #1a1d26;
   width: 100%;
@@ -12,8 +10,9 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 40px 20px;
-  max-width: 100%;
+  padding: 40px 16px;
+  max-width: 1750px;
+  margin: 0 auto;
 }
 
 .section-global h1 {
@@ -30,23 +29,21 @@
   width: 60px;
   height: 60px;
   object-fit: contain;
-  filter: brightness(0) invert(1); /* Делает иконки белыми, если они темные */
+  filter: brightness(0) invert(1);
   opacity: 0.9;
   transition: transform 0.2s ease;
 }
 
-/* Для сенсорных устройств */
 .button-lsde:active {
   transform: scale(0.95);
 }
 
-/* Планшеты (от 600px) */
 @media (min-width: 600px) {
   .section-global {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 30px;
-    padding: 50px 30px;
+    padding: 50px 24px;
   }
   
   .section-global h1 {
@@ -59,13 +56,12 @@
   }
 }
 
-/* Десктоп (от 900px) */
 @media (min-width: 900px) {
   .section-global {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-around;
-    padding: 80px 15% 10px;
+    padding: 80px 40px 10px;
     gap: 0;
   }
   
@@ -85,10 +81,9 @@
   }
 }
 
-/* Очень большие экраны */
 @media (min-width: 1400px) {
   .section-global {
-    padding: 100px 20% 20px;
+    padding: 100px 60px 20px;
   }
   
   .section-global h1 {
@@ -101,7 +96,6 @@
   }
 }
 
-/* Маленькие телефоны (до 480px) */
 @media (max-width: 480px) {
   .section-global h1 {
     font-size: 36px;
@@ -113,12 +107,11 @@
   }
   
   .section-global {
-    padding: 30px 16px;
+    padding: 30px 12px;
     gap: 16px;
   }
 }
 
-/* iPhone SE / 360px */
 @media (max-width: 360px) {
   .section-global h1 {
     font-size: 32px;
@@ -131,11 +124,10 @@
   
   .section-global {
     gap: 12px;
-    padding: 25px 12px;
+    padding: 25px 10px;
   }
 }
 
-/* Touch-оптимизация */
 @media (hover: none) and (pointer: coarse) {
   .button-lsde:hover {
     transform: none;
@@ -146,10 +138,9 @@
   }
 }
 
-/* Safe Area */
 @supports (padding: max(0px)) {
   .section-global {
-    padding-left: max(20px, env(safe-area-inset-left));
-    padding-right: max(20px, env(safe-area-inset-right));
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
   }
 }
