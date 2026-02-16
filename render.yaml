@@ -2,10 +2,10 @@ services:
   # Бэкенд (NestJS)
   - type: web
     name: kotloff-backend
-    runtime: node
-    rootDir: backend
-    buildCommand: npm install && npm run build
-    startCommand: npm run start:prod
+    runtime: image
+    repo: https://github.com/valerahthfthfh/WebSite
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
     envVars:
       - key: NODE_ENV
         value: production
@@ -13,10 +13,10 @@ services:
   # Фронтенд (React)
   - type: web
     name: kotloff-frontend
-    runtime: static
-    rootDir: react-app
-    buildCommand: npm install && npm run build
-    staticPublishPath: build
+    runtime: image
+    repo: https://github.com/valerahthfthfh/WebSite
+    dockerfilePath: ./react-app/Dockerfile
+    dockerContext: ./react-app
     envVars:
       - key: REACT_APP_API_URL
         value: https://kotloff-backend.onrender.com
