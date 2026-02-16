@@ -21,12 +21,12 @@ let AppController = class AppController {
         this.appService = appService;
     }
     async sendRequest(data) {
-        console.log('🚀 ПОСТУПИЛ ЗАПРОС НА /send-request');
-        console.log('📦 Тело запроса:', data);
-        return this.appService.handleRequest(data);
+        return this.appService.handleFullRequest(data);
+    }
+    async sendPhone(data) {
+        return this.appService.handlePhoneOnlyRequest(data);
     }
     getTest() {
-        console.log('✅ Тестовый запрос на /test');
         return { status: 'ok', message: 'Бэкенд работает' };
     }
 };
@@ -38,6 +38,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AppController.prototype, "sendRequest", null);
+__decorate([
+    (0, common_1.Post)('send-phone'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AppController.prototype, "sendPhone", null);
 __decorate([
     (0, common_1.Get)('test'),
     __metadata("design:type", Function),
