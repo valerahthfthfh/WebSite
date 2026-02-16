@@ -3,6 +3,7 @@ export declare class AppController {
     private readonly appService;
     constructor(appService: AppService);
     sendRequest(data: any): Promise<any>;
+    sendPhone(data: any): Promise<any>;
     getTest(): {
         status: string;
         message: string;
