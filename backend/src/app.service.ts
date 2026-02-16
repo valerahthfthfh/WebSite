@@ -5,8 +5,10 @@ import axios from 'axios';
 export class AppService {
   private readonly FIREBASE_URL = 'https://dataform-a57ff-default-rtdb.asia-southeast1.firebasedatabase.app';
   private readonly GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxn4WNchvPajG2R63BfuyIW9vmbz2tK3TZqWaMH6Tg2IJJIfyrjruMRJJyCn1SPjjTb/exec';
-  private readonly BOT_TOKEN = '8033399130:AAGI_89YLNq-FBrD5CacJK0bBSqtC7hwSdc';
-  private readonly ADMIN_ID = '804822685';
+  
+  // Telegram полностью отключен ⬇️
+  // private readonly BOT_TOKEN = '8033399130:AAGI_89YLNq-FBrD5CacJK0bBSqtC7hwSdc';
+  // private readonly ADMIN_ID = '804822685';
 
   async handleFullRequest(data: any): Promise<any> {
     const { name, phone, comment } = data;
@@ -16,10 +18,11 @@ export class AppService {
     }
 
     try {
-      console.log('Обработка полной заявки:', { name, phone, comment });
+      console.log('📝 Обработка полной заявки:', { name, phone, comment });
       
       const applicationId = `app_${Date.now()}`;
       
+      // Сохраняем в Firebase
       await this.saveToFirebase(applicationId, {
         type: 'full',
         name,
@@ -28,17 +31,21 @@ export class AppService {
         timestamp: new Date().toISOString()
       });
       
+      // Отправляем в Google Sheets
       await this.sendToGoogleSheets(name, phone, comment);
-      await this.sendToTelegramFull(name, phone, comment);
+      
+      // Telegram ОТКЛЮЧЕН - только лог в консоль
+      console.log('📢 [Telegram отключен] Уведомление не отправлено');
 
-      console.log('Полная заявка успешно обработана');
+      console.log('✅ Полная заявка успешно обработана');
+      
       return {
         success: true,
         message: 'Заявка успешно отправлена',
         applicationId,
       };
     } catch (error) {
-      console.error('Ошибка полной заявки:', error.message);
+      console.error('❌ Ошибка полной заявки:', error.message);
       return {
         success: false,
         message: 'Ошибка при отправке заявки',
@@ -54,32 +61,36 @@ export class AppService {
     }
 
     try {
-      console.log('Обработка заявки только телефон:', { phone });
+      console.log('📞 Обработка заявки (только телефон):', { phone });
       
       const applicationId = `phone_${Date.now()}`;
       
+      // Сохраняем в Firebase
       await this.savePhoneToFirebase(applicationId, {
         type: 'phone-only',
         phone,
         timestamp: new Date().toISOString()
       });
       
+      // Отправляем в Google Sheets (если доступен)
       try {
         await this.sendToGoogleSheets('', phone, '');
       } catch (sheetsError) {
-        console.log('Google Sheets недоступен, продолжаем...');
+        console.log('⚠️ Google Sheets недоступен, продолжаем...');
       }
       
-      await this.sendToTelegramPhoneOnly(phone);
+      // Telegram ОТКЛЮЧЕН - только лог в консоль
+      console.log('📢 [Telegram отключен] Уведомление не отправлено');
 
-      console.log('Заявка только телефон успешно обработана');
+      console.log('✅ Заявка (только телефон) успешно обработана');
+      
       return {
         success: true,
         message: 'Номер отправлен',
         applicationId,
       };
     } catch (error) {
-      console.error('Ошибка отправки номера:', error.message);
+      console.error('❌ Ошибка отправки номера:', error.message);
       return {
         success: false,
         message: 'Ошибка при отправке номера',
@@ -90,13 +101,13 @@ export class AppService {
   private async saveToFirebase(id: string, data: any): Promise<void> {
     const url = `${this.FIREBASE_URL}/applications/${id}.json`;
     await axios.put(url, data);
-    console.log('Firebase сохранено');
+    console.log('🔥 Firebase: данные сохранены');
   }
 
   private async savePhoneToFirebase(id: string, data: any): Promise<void> {
     const url = `${this.FIREBASE_URL}/phone-requests/${id}.json`;
     await axios.put(url, data);
-    console.log('Firebase телефон сохранено');
+    console.log('🔥 Firebase: телефон сохранен');
   }
 
   private async sendToGoogleSheets(name: string, phone: string, comment: string): Promise<void> {
@@ -106,7 +117,7 @@ export class AppService {
       params.append('phone', phone);
       params.append('comment', comment || '');
 
-      console.log('Отправка в Google Sheets:', params.toString());
+      console.log('📊 Отправка в Google Sheets:', params.toString());
 
       const response = await axios.post(
         this.GOOGLE_SHEETS_URL,
@@ -118,13 +129,18 @@ export class AppService {
         }
       );
       
-      console.log('Google Sheets ответ:', response.data);
+      console.log('📊 Google Sheets ответ:', response.data);
     } catch (error) {
-      console.error('Ошибка Google Sheets:', error.message);
+      console.error('❌ Ошибка Google Sheets:', error.message);
       throw error;
     }
   }
 
+  // =====================================================
+  // ⬇️ ВСЯ ЛОГИКА TELEGRAM ПОЛНОСТЬЮ ЗАКОММЕНТИРОВАНА ⬇️
+  // =====================================================
+  
+  /*
   private async sendToTelegramFull(name: string, phone: string, comment: string): Promise<void> {
     try {
       const date = new Date();
@@ -147,9 +163,9 @@ export class AppService {
         }
       );
       
-      console.log('Telegram ответ:', response.data);
+      console.log('📢 Telegram ответ:', response.data);
     } catch (error) {
-      console.error('Ошибка Telegram:', error.message);
+      console.error('❌ Ошибка Telegram:', error.message);
       throw error;
     }
   }
@@ -174,10 +190,11 @@ export class AppService {
         }
       );
       
-      console.log('Telegram телефон ответ:', response.data);
+      console.log('📢 Telegram телефон ответ:', response.data);
     } catch (error) {
-      console.error('Ошибка Telegram:', error.message);
+      console.error('❌ Ошибка Telegram:', error.message);
       throw error;
     }
   }
+  */
 }
