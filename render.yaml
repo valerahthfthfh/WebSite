@@ -1,4 +1,5 @@
 services:
+  # Бэкенд (NestJS)
   - type: web
     name: kotloff-backend
     runtime: node
@@ -9,6 +10,7 @@ services:
       - key: NODE_ENV
         value: production
 
+  # Фронтенд (React)
   - type: web
     name: kotloff-frontend
     runtime: static
