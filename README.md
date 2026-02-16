@@ -1,7 +1,7 @@
 ![alt text](image-1.png)
 # Проект "КотлOFF Service"
 
-## Fronted
+## Frontend
 * Core
     * React 18+ 
     * React Router v6
