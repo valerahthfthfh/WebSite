@@ -7,14 +7,16 @@ export class AppController {
 
   @Post('send-request')
   async sendRequest(@Body() data: any) {
-    console.log('🚀 ПОСТУПИЛ ЗАПРОС НА /send-request');
-    console.log('📦 Тело запроса:', data);
-    return this.appService.handleRequest(data);
+    return this.appService.handleFullRequest(data);
+  }
+
+  @Post('send-phone')
+  async sendPhone(@Body() data: any) {
+    return this.appService.handlePhoneOnlyRequest(data);
   }
 
   @Get('test')
   getTest() {
-    console.log('✅ Тестовый запрос на /test');
     return { status: 'ok', message: 'Бэкенд работает' };
   }
 }
