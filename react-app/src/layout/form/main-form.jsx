@@ -5,7 +5,7 @@ function MainForm() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [isFormHighlighted, setIsFormHighlighted] = useState(false);
   
-  const BACKEND_URL = 'http://localhost:5000/send-request';
+  const BACKEND_URL = 'https://kotloff-backend.onrender.com/send-request';
 
   const handleSubmit = async (e) => {
     e.preventDefault();

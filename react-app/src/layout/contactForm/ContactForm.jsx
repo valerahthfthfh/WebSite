@@ -19,7 +19,7 @@ function ContactForm() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/send-phone', {
+      const response = await fetch('https://kotloff-backend.onrender.com/send-phone', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
