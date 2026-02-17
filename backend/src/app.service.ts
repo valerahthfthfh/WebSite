@@ -33,10 +33,9 @@ export class AppService {
       // Отправляем в Google Sheets
       await this.sendToGoogleSheets(name, phone, comment);
       
-      // Telegram ОТКЛЮЧЕН - только лог в консоль
-      console.log('📢 [Telegram отключен] Уведомление не отправлено');
+      console.log('[Telegram отключен] Уведомление не отправлено');
 
-      console.log('✅ Полная заявка успешно обработана');
+      console.log('Полная заявка успешно обработана');
       
       return {
         success: true,
@@ -44,7 +43,7 @@ export class AppService {
         applicationId,
       };
     } catch (error) {
-      console.error('❌ Ошибка полной заявки:', error.message);
+      console.error('Ошибка полной заявки:', error.message);
       return {
         success: false,
         message: 'Ошибка при отправке заявки',
@@ -71,17 +70,16 @@ export class AppService {
         timestamp: new Date().toISOString()
       });
       
-      // Отправляем в Google Sheets (если доступен)
+      // Отправляем в Google Sheets 
       try {
         await this.sendToGoogleSheets('', phone, '');
       } catch (sheetsError) {
         console.log('⚠️ Google Sheets недоступен, продолжаем...');
       }
       
-      // Telegram ОТКЛЮЧЕН - только лог в консоль
-      console.log('📢 [Telegram отключен] Уведомление не отправлено');
+      console.log('[Telegram отключен] Уведомление не отправлено');
 
-      console.log('✅ Заявка (только телефон) успешно обработана');
+      console.log('Заявка (только телефон) успешно обработана');
       
       return {
         success: true,
@@ -128,9 +126,9 @@ export class AppService {
         }
       );
       
-      console.log('📊 Google Sheets ответ:', response.data);
+      console.log('Google Sheets ответ:', response.data);
     } catch (error) {
-      console.error('❌ Ошибка Google Sheets:', error.message);
+      console.error('Ошибка Google Sheets:', error.message);
       throw error;
     }
   }
@@ -158,9 +156,9 @@ export class AppService {
         }
       );
       
-      console.log('📢 Telegram ответ:', response.data);
+      console.log('Telegram ответ:', response.data);
     } catch (error) {
-      console.error('❌ Ошибка Telegram:', error.message);
+      console.error('Ошибка Telegram:', error.message);
       throw error;
     }
   }
