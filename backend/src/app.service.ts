@@ -6,9 +6,12 @@ export class AppService {
   private readonly FIREBASE_URL = 'https://dataform-a57ff-default-rtdb.asia-southeast1.firebasedatabase.app';
   private readonly GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxn4WNchvPajG2R63BfuyIW9vmbz2tK3TZqWaMH6Tg2IJJIfyrjruMRJJyCn1SPjjTb/exec';
   
-  // URL бота для отправки заявок (если бот на том же сервере)
-  // ВАЖНО: Если бот на другом сервере, замените localhost на IP адрес сервера с ботом
-  private readonly BOT_API_URL = 'http://localhost:5001/send_application';
+  // URL бота для отправки заявок
+  // ВАЖНО: Если бот на локальном компьютере, нужно использовать публичный URL через ngrok или туннель
+  // Или если бот на сервере - IP этого сервера
+  private readonly BOT_API_URL = 'http://192.168.1.83:5001/send_application';
+  // Для теста с другого компьютера используйте:
+  // private readonly BOT_API_URL = 'http://<IP-АДРЕС-КОМПЬЮТЕРА-С-БОТОМ>:5001/send_application';
 
   async handleFullRequest(data: any): Promise<any> {
     const { name, phone, comment } = data;
