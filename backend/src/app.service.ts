@@ -6,7 +6,8 @@ export class AppService {
   private readonly FIREBASE_URL = 'https://dataform-a57ff-default-rtdb.asia-southeast1.firebasedatabase.app';
   private readonly GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxn4WNchvPajG2R63BfuyIW9vmbz2tK3TZqWaMH6Tg2IJJIfyrjruMRJJyCn1SPjjTb/exec';
   
-  // ✅ ВАЖНО: замените на реальный IP сервера с ботом, если backend не на localhost
+  // URL бота для отправки заявок (если бот на том же сервере)
+  // ВАЖНО: Если бот на другом сервере, замените localhost на IP адрес сервера с ботом
   private readonly BOT_API_URL = 'http://localhost:5001/send_application';
 
   async handleFullRequest(data: any): Promise<any> {
@@ -31,6 +32,7 @@ export class AppService {
       
       await this.sendToGoogleSheets(name, phone, comment);
       
+      // Отправляем через эндпоинт бота
       await this.sendToBotEndpoint({
         name,
         phone,
@@ -78,6 +80,7 @@ export class AppService {
         console.log('⚠️ Google Sheets недоступен, продолжаем...');
       }
       
+      // Отправляем через эндпоинт бота
       await this.sendToBotEndpoint({
         phone,
         type: 'phone-only'
@@ -143,6 +146,7 @@ export class AppService {
       const timeNow = date.toLocaleTimeString('ru-RU');
       const dateNow = date.toLocaleDateString('ru-RU');
 
+      // Форматируем данные для отправки в бот
       let applicationData: any = {};
 
       if (data.type === 'full') {
@@ -170,15 +174,61 @@ export class AppService {
           headers: {
             'Content-Type': 'application/json',
           },
-          timeout: 5000
+          timeout: 5000 // 5 секунд таймаут
         }
       );
       
       console.log('🤖 Ответ от бота:', response.data);
     } catch (error) {
       console.error('❌ Ошибка отправки в бот:', error.message);
-      // ❌ Запасной метод полностью удалён, чтобы не создавать ложных сообщений
-      // Теперь если бот недоступен — просто логируем ошибку
+      
+      // Пробуем отправить напрямую главному админу как запасной вариант
+      try {
+        await this.sendToTelegramDirect(data);
+      } catch (fallbackError) {
+        console.error('❌ Ошибка запасной отправки:', fallbackError.message);
+      }
     }
+  }
+
+  private async sendToTelegramDirect(data: any): Promise<void> {
+    // Запасной метод отправки напрямую главному админу
+    const BOT_TOKEN = '8033399130:AAGI_89YLNq-FBrD5CacJK0bBSqtC7hwSdc';
+    const ADMIN_ID = '804822685';
+
+    const date = new Date();
+    const timeNow = date.toLocaleTimeString('ru-RU');
+    const dateNow = date.toLocaleDateString('ru-RU');
+
+    let message = '';
+    if (data.type === 'full') {
+      message = `🔥 <b>НОВАЯ ЗАЯВКА С САЙТА</b> 🔥
+
+<b>ФИО:</b> ${data.name}
+<b>Телефон:</b> <code>${data.phone}</code>
+<b>Комментарий:</b> ${data.comment || 'Не указан'}
+<b>Дата/Время:</b> ${dateNow}, ${timeNow}
+
+⚠️ Отправлено только главному администратору (ошибка массовой рассылки)`;
+    } else {
+      message = `🔥 <b>НОВАЯ ЗАЯВКА С САЙТА</b> 🔥
+
+<b>Телефон:</b> <code>${data.phone}</code>
+<b>Тип:</b> Только телефон
+<b>Дата/Время:</b> ${dateNow}, ${timeNow}
+
+⚠️ Отправлено только главному администратору (ошибка массовой рассылки)`;
+    }
+
+    const response = await axios.post(
+      `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+      {
+        chat_id: ADMIN_ID,
+        text: message,
+        parse_mode: 'HTML',
+      }
+    );
+    
+    console.log('📢 Запасная отправка в Telegram:', response.data);
   }
 }
