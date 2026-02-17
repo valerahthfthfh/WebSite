@@ -6,8 +6,9 @@ export class AppService {
   private readonly FIREBASE_URL = 'https://dataform-a57ff-default-rtdb.asia-southeast1.firebasedatabase.app';
   private readonly GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxn4WNchvPajG2R63BfuyIW9vmbz2tK3TZqWaMH6Tg2IJJIfyrjruMRJJyCn1SPjjTb/exec';
   
-  private readonly BOT_TOKEN = '8033399130:AAGI_89YLNq-FBrD5CacJK0bBSqtC7hwSdc';
-  private readonly ADMIN_ID = '804822685';
+  // Telegram отключен
+  // private readonly BOT_TOKEN = '8033399130:AAGI_89YLNq-FBrD5CacJK0bBSqtC7hwSdc';
+  // private readonly ADMIN_ID = '804822685';
 
   async handleFullRequest(data: any): Promise<any> {
     const { name, phone, comment } = data;
@@ -21,7 +22,6 @@ export class AppService {
       
       const applicationId = `app_${Date.now()}`;
       
-      // Сохраняем в Firebase
       await this.saveToFirebase(applicationId, {
         type: 'full',
         name,
@@ -30,12 +30,9 @@ export class AppService {
         timestamp: new Date().toISOString()
       });
       
-      // Отправляем в Google Sheets
       await this.sendToGoogleSheets(name, phone, comment);
       
-      console.log('[Telegram отключен] Уведомление не отправлено');
-
-      console.log('Полная заявка успешно обработана');
+      console.log('✅ Полная заявка успешно обработана');
       
       return {
         success: true,
@@ -43,7 +40,7 @@ export class AppService {
         applicationId,
       };
     } catch (error) {
-      console.error('Ошибка полной заявки:', error.message);
+      console.error('❌ Ошибка полной заявки:', error.message);
       return {
         success: false,
         message: 'Ошибка при отправке заявки',
@@ -63,23 +60,19 @@ export class AppService {
       
       const applicationId = `phone_${Date.now()}`;
       
-      // Сохраняем в Firebase
       await this.savePhoneToFirebase(applicationId, {
         type: 'phone-only',
         phone,
         timestamp: new Date().toISOString()
       });
       
-      // Отправляем в Google Sheets 
       try {
         await this.sendToGoogleSheets('', phone, '');
       } catch (sheetsError) {
         console.log('⚠️ Google Sheets недоступен, продолжаем...');
       }
       
-      console.log('[Telegram отключен] Уведомление не отправлено');
-
-      console.log('Заявка (только телефон) успешно обработана');
+      console.log('✅ Заявка (только телефон) успешно обработана');
       
       return {
         success: true,
@@ -126,68 +119,10 @@ export class AppService {
         }
       );
       
-      console.log('Google Sheets ответ:', response.data);
+      console.log('📊 Google Sheets ответ:', response.data);
     } catch (error) {
-      console.error('Ошибка Google Sheets:', error.message);
+      console.error('❌ Ошибка Google Sheets:', error.message);
       throw error;
     }
   }
-
-  
-  private async sendToTelegramFull(name: string, phone: string, comment: string): Promise<void> {
-    try {
-      const date = new Date();
-      const timeNow = date.toLocaleTimeString('ru-RU');
-      const dateNow = date.toLocaleDateString('ru-RU');
-
-      const message = `🔥 <b>НОВАЯ ЗАЯВКА С САЙТА</b> 🔥
-
-<b>ФИО:</b> ${name}
-<b>Телефон:</b> <code>${phone}</code>
-<b>Комментарий:</b> ${comment || 'Не указан'}
-<b>Дата/Время:</b> ${dateNow}, ${timeNow}`;
-
-      const response = await axios.post(
-        `https://api.telegram.org/bot${this.BOT_TOKEN}/sendMessage`,
-        {
-          chat_id: this.ADMIN_ID,
-          text: message,
-          parse_mode: 'HTML',
-        }
-      );
-      
-      console.log('Telegram ответ:', response.data);
-    } catch (error) {
-      console.error('Ошибка Telegram:', error.message);
-      throw error;
-    }
-  }
-
-  private async sendToTelegramPhoneOnly(phone: string): Promise<void> {
-    try {
-      const date = new Date();
-      const timeNow = date.toLocaleTimeString('ru-RU');
-      const dateNow = date.toLocaleDateString('ru-RU');
-
-      const message = `🔥 <b>НОВАЯ ЗАЯВКА С САЙТА</b> 🔥
-
-<b>Телефон:</b> <code>${phone}</code>
-<b>Дата/Время:</b> ${dateNow}, ${timeNow}`;
-
-      const response = await axios.post(
-        `https://api.telegram.org/bot${this.BOT_TOKEN}/sendMessage`,
-        {
-          chat_id: this.ADMIN_ID,
-          text: message,
-          parse_mode: 'HTML',
-        }
-      );
-      
-      console.log('📢 Telegram телефон ответ:', response.data);
-    } catch (error) {
-      console.error('❌ Ошибка Telegram:', error.message);
-      throw error;
-    }
-  }
-  
 }

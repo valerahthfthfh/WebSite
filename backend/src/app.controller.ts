@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, Options } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -18,5 +18,21 @@ export class AppController {
   @Get('test')
   getTest() {
     return { status: 'ok', message: 'Бэкенд работает' };
+  }
+
+  // Обработка preflight запросов (OPTIONS)
+  @Options('send-request')
+  handleOptionsSendRequest() {
+    return {};
+  }
+
+  @Options('send-phone')
+  handleOptionsSendPhone() {
+    return {};
+  }
+
+  @Options('test')
+  handleOptionsTest() {
+    return {};
   }
 }
