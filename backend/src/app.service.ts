@@ -6,9 +6,8 @@ export class AppService {
   private readonly FIREBASE_URL = 'https://dataform-a57ff-default-rtdb.asia-southeast1.firebasedatabase.app';
   private readonly GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxn4WNchvPajG2R63BfuyIW9vmbz2tK3TZqWaMH6Tg2IJJIfyrjruMRJJyCn1SPjjTb/exec';
   
-  // Telegram Token - раскомментировано!
-  private readonly BOT_TOKEN = '8033399130:AAGI_89YLNq-FBrD5CacJK0bBSqtC7hwSdc';
-  private readonly ADMIN_ID = '804822685';
+  // URL бота для отправки заявок (предполагается, что бот работает на том же сервере)
+  private readonly BOT_API_URL = 'http://localhost:5001/send_application';
 
   async handleFullRequest(data: any): Promise<any> {
     const { name, phone, comment } = data;
@@ -32,8 +31,13 @@ export class AppService {
       
       await this.sendToGoogleSheets(name, phone, comment);
       
-      // Отправляем в Telegram (раскомментировано!)
-      await this.sendToTelegramFull(name, phone, comment);
+      // Отправляем через эндпоинт бота, чтобы заявка ушла всем администраторам
+      await this.sendToBotEndpoint({
+        name,
+        phone,
+        comment,
+        type: 'full'
+      });
 
       console.log('✅ Полная заявка успешно обработана');
       
@@ -75,8 +79,11 @@ export class AppService {
         console.log('⚠️ Google Sheets недоступен, продолжаем...');
       }
       
-      // Отправляем в Telegram (раскомментировано!)
-      await this.sendToTelegramPhoneOnly(phone);
+      // Отправляем через эндпоинт бота, чтобы заявка ушла всем администраторам
+      await this.sendToBotEndpoint({
+        phone,
+        type: 'phone-only'
+      });
 
       console.log('✅ Заявка (только телефон) успешно обработана');
       
@@ -132,59 +139,93 @@ export class AppService {
     }
   }
 
-  private async sendToTelegramFull(name: string, phone: string, comment: string): Promise<void> {
+  private async sendToBotEndpoint(data: any): Promise<void> {
     try {
       const date = new Date();
       const timeNow = date.toLocaleTimeString('ru-RU');
       const dateNow = date.toLocaleDateString('ru-RU');
 
-      const message = `🔥 <b>НОВАЯ ЗАЯВКА С САЙТА</b> 🔥
+      // Форматируем данные для отправки
+      let applicationData: any = {
+        'Дата/Время': `${dateNow}, ${timeNow}`
+      };
 
-<b>ФИО:</b> ${name}
-<b>Телефон:</b> <code>${phone}</code>
-<b>Комментарий:</b> ${comment || 'Не указан'}
-<b>Дата/Время:</b> ${dateNow}, ${timeNow}`;
+      if (data.type === 'full') {
+        applicationData = {
+          'ФИО': data.name,
+          'Телефон': data.phone,
+          'Комментарий': data.comment || 'Не указан',
+          'Дата/Время': `${dateNow}, ${timeNow}`
+        };
+      } else {
+        applicationData = {
+          'Телефон': data.phone,
+          'Тип заявки': 'Только телефон',
+          'Дата/Время': `${dateNow}, ${timeNow}`
+        };
+      }
+
+      console.log('📤 Отправка заявки через эндпоинт бота:', applicationData);
 
       const response = await axios.post(
-        `https://api.telegram.org/bot${this.BOT_TOKEN}/sendMessage`,
+        this.BOT_API_URL,
+        applicationData,
         {
-          chat_id: this.ADMIN_ID,
-          text: message,
-          parse_mode: 'HTML',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
       );
       
-      console.log('📢 Telegram ответ:', response.data);
+      console.log('🤖 Бот эндпоинт ответ:', response.data);
     } catch (error) {
-      console.error('❌ Ошибка Telegram:', error.message);
-      // Не выбрасываем ошибку дальше, чтобы не ломать основной процесс
+      console.error('❌ Ошибка отправки через эндпоинт бота:', error.message);
+      
+      // Если не удалось отправить через эндпоинт, пробуем отправить напрямую главному админу
+      try {
+        await this.sendToTelegramDirect(data);
+      } catch (fallbackError) {
+        console.error('❌ Ошибка fallback отправки:', fallbackError.message);
+      }
     }
   }
 
-  private async sendToTelegramPhoneOnly(phone: string): Promise<void> {
-    try {
-      const date = new Date();
-      const timeNow = date.toLocaleTimeString('ru-RU');
-      const dateNow = date.toLocaleDateString('ru-RU');
+  private async sendToTelegramDirect(data: any): Promise<void> {
+    // Резервный метод отправки напрямую главному админу
+    const BOT_TOKEN = '8033399130:AAGI_89YLNq-FBrD5CacJK0bBSqtC7hwSdc';
+    const ADMIN_ID = '804822685';
 
-      const message = `🔥 <b>НОВАЯ ЗАЯВКА С САЙТА</b> 🔥
+    const date = new Date();
+    const timeNow = date.toLocaleTimeString('ru-RU');
+    const dateNow = date.toLocaleDateString('ru-RU');
 
-<b>Телефон:</b> <code>${phone}</code>
-<b>Дата/Время:</b> ${dateNow}, ${timeNow}`;
+    let message = '';
+    if (data.type === 'full') {
+      message = `🔥 <b>НОВАЯ ЗАЯВКА С САЙТА</b> 🔥
 
-      const response = await axios.post(
-        `https://api.telegram.org/bot${this.BOT_TOKEN}/sendMessage`,
-        {
-          chat_id: this.ADMIN_ID,
-          text: message,
-          parse_mode: 'HTML',
-        }
-      );
-      
-      console.log('📢 Telegram телефон ответ:', response.data);
-    } catch (error) {
-      console.error('❌ Ошибка Telegram:', error.message);
-      // Не выбрасываем ошибку дальше
+<b>ФИО:</b> ${data.name}
+<b>Телефон:</b> <code>${data.phone}</code>
+<b>Комментарий:</b> ${data.comment || 'Не указан'}
+<b>Дата/Время:</b> ${dateNow}, ${timeNow}
+
+⚠️ Отправлено только главному администратору (ошибка массовой рассылки)`;
+    } else {
+      message = `🔥 <b>НОВАЯ ЗАЯВКА С САЙТА</b> 🔥
+
+<b>Телефон:</b> <code>${data.phone}</code>
+<b>Тип:</b> Только телефон
+<b>Дата/Время:</b> ${dateNow}, ${timeNow}
+
+⚠️ Отправлено только главному администратору (ошибка массовой рассылки)`;
     }
+
+    await axios.post(
+      `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+      {
+        chat_id: ADMIN_ID,
+        text: message,
+        parse_mode: 'HTML',
+      }
+    );
   }
 }
