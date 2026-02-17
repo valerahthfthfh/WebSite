@@ -29,6 +29,15 @@ let AppController = class AppController {
     getTest() {
         return { status: 'ok', message: 'Бэкенд работает' };
     }
+    handleOptionsSendRequest() {
+        return {};
+    }
+    handleOptionsSendPhone() {
+        return {};
+    }
+    handleOptionsTest() {
+        return {};
+    }
 };
 exports.AppController = AppController;
 __decorate([
@@ -51,6 +60,24 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "getTest", null);
+__decorate([
+    (0, common_1.Options)('send-request'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "handleOptionsSendRequest", null);
+__decorate([
+    (0, common_1.Options)('send-phone'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "handleOptionsSendPhone", null);
+__decorate([
+    (0, common_1.Options)('test'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "handleOptionsTest", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [app_service_1.AppService])
