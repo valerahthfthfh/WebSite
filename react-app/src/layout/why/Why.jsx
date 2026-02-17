@@ -6,7 +6,7 @@ import Tool from '../../shared/img/инструменты.png';
 
 function Why() {
   return (
-    <div className="container">
+    <div className="container" id="why-section">
         <main className="main-content">
             <section className="hero">
                 <div className="hero-text">

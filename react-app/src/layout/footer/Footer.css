@@ -62,8 +62,10 @@ footer {
   margin: 20px 0;
 }
 
-.footer-content img {
-  max-width: 150px;
+.footer-content .footer-social-link img {
+  max-width: 50px;
+  margin: 20px;
+
 }
 
 .icons a {

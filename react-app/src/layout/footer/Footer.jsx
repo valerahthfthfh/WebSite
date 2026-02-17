@@ -4,28 +4,66 @@ import Av1 from '../../shared/icon/av1.png';
 import Tel1 from '../../shared/icon/tel1.png';
 
 function Footer() {
+  // Функция для прокрутки к блоку Why (О нас)
+  const scrollToWhy = () => {
+    const whySection = document.getElementById('why-section');
+    if (whySection) {
+      whySection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Функция для прокрутки к блоку Service (Наши работы)
+  const scrollToService = () => {
+    const serviceSection = document.getElementById('services-section');
+    if (serviceSection) {
+      serviceSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Функция для прокрутки к блоку Data (Отзывы)
+  const scrollToData = () => {
+    const dataSection = document.getElementById('data-section');
+    if (dataSection) {
+      dataSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer>
       <div className="footer">
         <div className="footer-content">
           <h2>Котл<span>OFF</span></h2>
-          <p>Сервис профисиональных услуг, в помоще <br /> починки бытовой техники, а также отопления</p>
-          <img src={Av1} alt="a" className='button-lsd'/>
-          <img src={Tel1} alt="t" className='button-lsd'/>
-          <div className="icons">
-            <a href="#"></a>
-            <a href="#"></a>
-            <a href="#"></a>
-            <a href="#"></a>
+          <p>Сервис по ремонту бытовой техники <br /> и систем отопления.</p>
+          
+          <div className="footer-social">
+            <a 
+              href="https://www.avito.ru/brands/4dee9d7057af26f1f76d19be9bf29d58/all/bytovaya_tehnika?src=sharing&sellerId=7b28bfe8dc5c22181eaf9486ca056e5e" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="footer-social-link"
+              title="Открыть Avito в новой вкладке"
+            >
+              <img src={Av1} alt="Avito" className='footer-social-icon'/>
+            </a>
+            
+            <a  
+              href="https://t.me/kotloffgazsupportbot?start=MTkuNHB1NWdJS1NOOVY" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="footer-social-link"
+              title="Открыть Telegram в новой вкладке"
+            >
+              <img src={Tel1} alt="Telegram" className='footer-social-icon'/>
+            </a>
           </div>
         </div>
 
         <div className="footer-content">
           <h4>Компания</h4>
           <ul>
-            <li><a href="#">О нас</a></li>
-            <li><a href="#">Наши работы</a></li>
-            <li><a href="#">Отзывы</a></li>
+            <li><a href="#" onClick={(e) => { e.preventDefault(); scrollToWhy(); }}>О нас</a></li>
+            <li><a href="#" onClick={(e) => { e.preventDefault(); scrollToService(); }}>Наши работы</a></li>
+            <li><a href="#" onClick={(e) => { e.preventDefault(); scrollToData(); }}>Отзывы</a></li>
           </ul>
         </div>
 
@@ -42,7 +80,9 @@ function Footer() {
           <h4>Помощь</h4>
           <ul>
             <li><a href="#">Контакты</a></li>
-            <li><a href="#">Разработчики</a></li>
+            <li><a href="https://github.com/valerahthfthfh/WebSite"
+              target="_blank" 
+              rel="noopener noreferrer">Разработчики</a></li>
             <li><a href="#">FAQ</a></li>
           </ul>
         </div>

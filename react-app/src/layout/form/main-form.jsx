@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 function MainForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isFormHighlighted, setIsFormHighlighted] = useState(false);
   
   const BACKEND_URL = 'http://localhost:5000/send-request';
 
@@ -47,6 +48,23 @@ function MainForm() {
     }
   };
 
+  // Функция для прокрутки к блоку услуг
+  const scrollToServices = () => {
+    const servicesSection = document.getElementById('services-section');
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Функция для подсветки формы и прокрутки к ней
+  const highlightForm = () => {
+    setIsFormHighlighted(true); 
+    // Убираем подсветку через 2 секунды
+    setTimeout(() => {
+      setIsFormHighlighted(false);
+    }, 2000);
+  };
+
   return (
     <main className="main-content">
       <div className="content-container">
@@ -71,15 +89,19 @@ function MainForm() {
           </div>
 
           <div className="button-rega">
-            <button className="button-1">Узнать больше</button>
-            <button className="button-2">Отправить заявку</button>
+            <button className="button-1" onClick={scrollToServices}>
+              Узнать больше
+            </button>
+            <button className="button-2" onClick={highlightForm}>
+              Отправить заявку
+            </button>
           </div>
         </section>
 
         <section className="form-section">
           <form
             onSubmit={handleSubmit}
-            className="login-form"
+            className={`login-form ${isFormHighlighted ? 'form-highlighted' : ''}`}
             name="submit-to-google-sheet"
             id="dataForm"
           >
@@ -144,7 +166,13 @@ function MainForm() {
 
       <style jsx>{`
         .login-form {
-          position: relative; /* для позиционирования оверлея */
+          position: relative;
+          transition: box-shadow 0.3s ease, border 0.3s ease;
+        }
+
+        .form-highlighted {
+          box-shadow: 0 0 0 3px var(--color-primary), 0 15px 40px rgba(253, 73, 67, 0.3);
+          border: 2px solid var(--color-primary);
         }
 
         .success-overlay {

@@ -78,7 +78,7 @@ function Data() {
   ];
 
   return (
-    <div className="Data">
+    <div className="Data" id="data-section">
 
       <div className="hero-text-data">
         <h1 className="hero-logo-data">Котл<span>OFF</span> service</h1>

@@ -6,9 +6,8 @@ export class AppService {
   private readonly FIREBASE_URL = 'https://dataform-a57ff-default-rtdb.asia-southeast1.firebasedatabase.app';
   private readonly GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxn4WNchvPajG2R63BfuyIW9vmbz2tK3TZqWaMH6Tg2IJJIfyrjruMRJJyCn1SPjjTb/exec';
   
-  // Telegram полностью отключен ⬇️
-  // private readonly BOT_TOKEN = '8033399130:AAGI_89YLNq-FBrD5CacJK0bBSqtC7hwSdc';
-  // private readonly ADMIN_ID = '804822685';
+  private readonly BOT_TOKEN = '8033399130:AAGI_89YLNq-FBrD5CacJK0bBSqtC7hwSdc';
+  private readonly ADMIN_ID = '804822685';
 
   async handleFullRequest(data: any): Promise<any> {
     const { name, phone, comment } = data;
@@ -136,11 +135,7 @@ export class AppService {
     }
   }
 
-  // =====================================================
-  // ⬇️ ВСЯ ЛОГИКА TELEGRAM ПОЛНОСТЬЮ ЗАКОММЕНТИРОВАНА ⬇️
-  // =====================================================
   
-  /*
   private async sendToTelegramFull(name: string, phone: string, comment: string): Promise<void> {
     try {
       const date = new Date();
@@ -196,5 +191,5 @@ export class AppService {
       throw error;
     }
   }
-  */
+  
 }

@@ -30,6 +30,11 @@ body {
   flex-direction: column;
 }
 
+.form-highlighted {
+  box-shadow: 0 0 0 3px var(--color-primary), 0 15px 40px rgba(253, 73, 67, 0.3);
+  border: 2px solid var(--color-primary);
+}
+
 /* ---------- HEADER ---------- */
 .header {
   background: white;

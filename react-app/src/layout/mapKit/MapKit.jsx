@@ -10,6 +10,15 @@ import Phone from '../../shared/img/phone.png'
 
 function MapKit() {
   const location = [56.117703, 47.222953];
+
+  // Функция для прокрутки к блоку ContactForm
+  const scrollToContactForm = () => {
+    const contactFormSection = document.getElementById('contact-form-section');
+    if (contactFormSection) {
+      contactFormSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="contact-container">
       <div className="content-wrapper">
@@ -61,7 +70,7 @@ function MapKit() {
         <div className="right-section">
           <div className="contact-info">
             <div className="section-title">
-              <h2>Мы приедем очень<br /><span>быстро вам на помощь</span></h2>
+              <h2>Мы приедем очень<br /><span>быстро к вам на помощь</span></h2>
             </div>
             
             <div className="address-block">
@@ -72,7 +81,7 @@ function MapKit() {
                   </div>
                   <div className="text-content">
                     <p className="address-text">
-                      <strong>г.Чебоксары р-н Ленинский,</strong>
+                      <strong>г. Чебоксары р-н Ленинский,</strong>
                       ул. П.В. Дементьева, 18к4
                     </p>
                   </div>
@@ -120,16 +129,33 @@ function MapKit() {
             </div>
 
             <div className="action-row">
-              <button className="callback-button">
+              {/* Добавляем onClick на кнопку */}
+              <button 
+                className="callback-button"
+                onClick={scrollToContactForm}
+              >
                 Заказать звонок
               </button>
               
               <div className="social-icons">
-                <a href="#" className="social-link">
-                   <img src={Avito} alt="telegram" className='button-link'/>
+                <a 
+                  href="https://www.avito.ru/brands/4dee9d7057af26f1f76d19be9bf29d58/all/bytovaya_tehnika?src=sharing&sellerId=7b28bfe8dc5c22181eaf9486ca056e5e" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="social-link"
+                  title="Открыть Avito в новой вкладке"
+                >
+                  <img src={Avito} alt="Avito" className='button-link'/>
                 </a>
-                <a href="#" className="social-link">
-                  <img src={Telegram} alt="telegram" className='button-link'/>
+
+                <a 
+                  href="https://t.me/kotloffgazsupportbot?start=MTkuNHB1NWdJS1NOOVY" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="social-link"
+                  title="Открыть Telegram в новой вкладке"
+                >
+                  <img src={Telegram} alt="Telegram" className='button-link'/>
                 </a>
               </div>
             </div>

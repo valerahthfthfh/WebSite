@@ -44,13 +44,13 @@ function ContactForm() {
   };
 
   return (
-    <div className='contact-form-main'>
+    <div className='contact-form-main' id="contact-form-section"> {/* ← Добавь id сюда */}
       <div className='input-number-phone'>
         <div className="hero-text">
           <h1 className="hero-logo">Котл<span>OFF</span> service</h1>
           <h2 className="hero-title-g">Мы свяжемся <span>с вами!</span></h2>
         </div>
-        <p>Отправьте номер телефона сегодня, чтобы мастер смог вам помочь уже сейчас.</p>
+        <p>Отправьте номер телефона сейчас, чтобы мастер смог вам помочь уже сегодня.</p>
         
         {showSuccess && (
           <div className="success-message">

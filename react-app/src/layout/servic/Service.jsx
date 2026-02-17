@@ -8,7 +8,7 @@ import Fridge from '../../shared/icon/Холодильник.png'
 import Hat from '../../shared/icon/шляпа.png'
 function Service() {
   return (
-    <div class="container">
+    <div class="container" id="services-section">
         <main class="main-content">
             <section class="hero">
 

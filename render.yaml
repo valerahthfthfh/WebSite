@@ -1,5 +1,4 @@
 services:
-  # Бэкенд (NestJS)
   - type: web
     name: kotloff-backend
     runtime: image
@@ -10,7 +9,6 @@ services:
       - key: NODE_ENV
         value: production
 
-  # Фронтенд (React)
   - type: web
     name: kotloff-frontend
     runtime: image
@@ -22,7 +20,7 @@ services:
         value: https://kotloff-backend.onrender.com
 
 
-  - type: worker           # или web, если нужен Flask
+  - type: worker           
     name: kotloff-telegram-bot
     runtime: python
     rootDir: telegram-bot
