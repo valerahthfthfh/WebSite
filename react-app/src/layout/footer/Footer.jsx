@@ -78,7 +78,6 @@ function Footer() {
           <h4>Информация</h4>
           <ul>
             <li><a href="#" onClick={(e) => e.preventDefault()}>Пользовательское соглашение</a></li>
-            {/* Используем Link для навигации без перезагрузки страницы */}
             <li><Link to="/privacy-policy">Обработка персональных данных</Link></li>
             <li><Link to="/privacy-policy">Cooke</Link></li>
           </ul>

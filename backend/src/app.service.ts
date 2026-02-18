@@ -6,7 +6,7 @@ export class AppService {
   private readonly FIREBASE_URL = 'https://dataform-a57ff-default-rtdb.asia-southeast1.firebasedatabase.app';
   private readonly GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxn4WNchvPajG2R63BfuyIW9vmbz2tK3TZqWaMH6Tg2IJJIfyrjruMRJJyCn1SPjjTb/exec';
   
-  private readonly BOT_API_URL = 'http://192.168.1.83:5001/send_application';
+  private readonly BOT_API_URL = 'https://tg-bot-production-9b5a.up.railway.app/send_application';
 
   async handleFullRequest(data: any): Promise<any> {
     const { name, phone, comment } = data;
