@@ -5,38 +5,38 @@ import YandexMetrika from './YandexMetrika';
 function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
   const [consentGiven, setConsentGiven] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    // Проверяем, есть ли в cookie метка о согласии
-    const consentGivenCookie = document.cookie.split('; ').find(row => row.startsWith('userConsent='));
-    
-    if (consentGivenCookie) {
-      // Если согласие уже было, не показываем баннер и включаем аналитику
-      setIsVisible(false);
-      setConsentGiven(true);
-    } else {
-      // Если согласия нет, показываем баннер через небольшую задержку
-      setTimeout(() => {
-        setIsVisible(true);
-      }, 1000);
+    if (!isInitialized) {
+      const consentGivenCookie = document.cookie.split('; ').find(row => row.startsWith('userConsent='));
+      
+      if (consentGivenCookie) {
+        setConsentGiven(true);
+        setIsVisible(false);
+      } else {
+        const timer = setTimeout(() => {
+          setIsVisible(true);
+        }, 1000);
+        
+        return () => clearTimeout(timer);
+      }
+      
+      setIsInitialized(true);
     }
-  }, []);
+  }, [isInitialized]);
 
   const acceptCookies = () => {
-    // Устанавливаем куку с сроком действия на 1 год
     const expiryDate = new Date();
     expiryDate.setFullYear(expiryDate.getFullYear() + 1);
     document.cookie = `userConsent=true; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax`;
     
-    // Включаем аналитику
     setConsentGiven(true);
-    // Скрываем баннер
     setIsVisible(false);
   };
 
   return (
     <>
-      {/* Баннер показывается, только если видимость включена */}
       {isVisible && (
         <div className="cookie-banner">
           <div className="cookie-content">
@@ -53,7 +53,6 @@ function CookieBanner() {
         </div>
       )}
       
-      {/* Аналитика рендерится, только если согласие получено */}
       {consentGiven && <YandexMetrika />}
     </>
   );

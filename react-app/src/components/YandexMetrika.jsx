@@ -1,64 +1,58 @@
-import React, { useState, useEffect } from 'react';
-import './CookieBanner.css';
-import YandexMetrika from './YandexMetrika';
+import React, { useEffect, useRef } from 'react';
 
-function CookieBanner() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [consentGiven, setConsentGiven] = useState(false);
+const YandexMetrika = () => {
+  const isInitialized = useRef(false);
 
   useEffect(() => {
-    // Проверяем, есть ли в cookie метка о согласии
-    const consentGivenCookie = document.cookie.split('; ').find(row => row.startsWith('userConsent='));
+    if (isInitialized.current) return;
     
-    if (consentGivenCookie) {
-      // Если согласие уже было, не показываем баннер и включаем аналитику
-      setIsVisible(false);
-      setConsentGiven(true);
-    } else {
-      // Если согласия нет, показываем баннер через небольшую задержку
-      const timer = setTimeout(() => {
-        setIsVisible(true);
-      }, 1000);
-      
-      return () => clearTimeout(timer);
+    if (!document.querySelector('script[src*="metrika/tag.js"]')) {
+      const script = document.createElement('script');
+      script.src = 'https://mc.yandex.ru/metrika/tag.js?id=106884792';
+      script.async = true;
+      document.head.appendChild(script);
+
+      script.onload = () => {
+        if (typeof window.ym === 'function') {
+          window.ym(106884792, 'init', {
+            ssr: true,
+            webvisor: true,
+            clickmap: true,
+            ecommerce: "dataLayer",
+            accurateTrackBounce: true,
+            trackLinks: true
+          });
+        }
+      };
     }
+
+    const noscriptImg = document.createElement('noscript');
+    const div = document.createElement('div');
+    const img = document.createElement('img');
+    
+    img.src = 'https://mc.yandex.ru/watch/106884792';
+    img.style.position = 'absolute';
+    img.style.left = '-9999px';
+    img.alt = '';
+    
+    div.appendChild(img);
+    noscriptImg.appendChild(div);
+    document.body.appendChild(noscriptImg);
+    
+    isInitialized.current = true;
+
+    return () => {
+     
+      const noscriptElements = document.querySelectorAll('noscript');
+      noscriptElements.forEach(el => {
+        if (el.innerHTML && el.innerHTML.includes('mc.yandex.ru/watch/106884792')) {
+          el.remove();
+        }
+      });
+    };
   }, []);
 
-  const acceptCookies = () => {
-    // Устанавливаем куку с сроком действия на 1 год
-    const expiryDate = new Date();
-    expiryDate.setFullYear(expiryDate.getFullYear() + 1);
-    document.cookie = `userConsent=true; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax`;
-    
-    // Включаем аналитику
-    setConsentGiven(true);
-    // Скрываем баннер
-    setIsVisible(false);
-  };
+  return null;
+};
 
-  return (
-    <>
-      {/* Баннер показывается, только если видимость включена */}
-      {isVisible && (
-        <div className="cookie-banner">
-          <div className="cookie-content">
-            <p className="cookie-text">
-              <span className="cookie-icon">🍪</span>
-              Мы используем файлы cookie, чтобы улучшить вашу работу с сайтом. 
-              Продолжая просмотр, вы соглашаетесь с нашей{' '}
-              <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">политикой конфиденциальности</a>.
-            </p>
-            <button className="cookie-button" onClick={acceptCookies}>
-              Принять
-            </button>
-          </div>
-        </div>
-      )}
-      
-      {/* Аналитика рендерится, только если согласие получено */}
-      {consentGiven && <YandexMetrika />}
-    </>
-  );
-}
-
-export default CookieBanner;
+export default YandexMetrika;
