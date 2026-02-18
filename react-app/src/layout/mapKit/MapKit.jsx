@@ -20,7 +20,7 @@ function MapKit() {
   };
 
   return (
-    <div className="contact-container">
+    <div className="contact-container" id='a'>
       <div className="content-wrapper">
         {/* Левая часть с картой */}
         <div className="left-section">

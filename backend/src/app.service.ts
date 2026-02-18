@@ -6,12 +6,7 @@ export class AppService {
   private readonly FIREBASE_URL = 'https://dataform-a57ff-default-rtdb.asia-southeast1.firebasedatabase.app';
   private readonly GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxn4WNchvPajG2R63BfuyIW9vmbz2tK3TZqWaMH6Tg2IJJIfyrjruMRJJyCn1SPjjTb/exec';
   
-  // URL бота для отправки заявок
-  // ВАЖНО: Если бот на локальном компьютере, нужно использовать публичный URL через ngrok или туннель
-  // Или если бот на сервере - IP этого сервера
   private readonly BOT_API_URL = 'http://192.168.1.83:5001/send_application';
-  // Для теста с другого компьютера используйте:
-  // private readonly BOT_API_URL = 'http://<IP-АДРЕС-КОМПЬЮТЕРА-С-БОТОМ>:5001/send_application';
 
   async handleFullRequest(data: any): Promise<any> {
     const { name, phone, comment } = data;
@@ -21,7 +16,6 @@ export class AppService {
     }
 
     try {
-      console.log('📝 Обработка полной заявки:', { name, phone, comment });
       
       const applicationId = `app_${Date.now()}`;
       
@@ -42,8 +36,6 @@ export class AppService {
         comment,
         type: 'full'
       });
-
-      console.log('✅ Полная заявка успешно обработана');
       
       return {
         success: true,
@@ -51,7 +43,6 @@ export class AppService {
         applicationId,
       };
     } catch (error) {
-      console.error('❌ Ошибка полной заявки:', error.message);
       return {
         success: false,
         message: 'Ошибка при отправке заявки',
@@ -67,7 +58,6 @@ export class AppService {
     }
 
     try {
-      console.log('📞 Обработка заявки (только телефон):', { phone });
       
       const applicationId = `phone_${Date.now()}`;
       
@@ -80,7 +70,6 @@ export class AppService {
       try {
         await this.sendToGoogleSheets('', phone, '');
       } catch (sheetsError) {
-        console.log('⚠️ Google Sheets недоступен, продолжаем...');
       }
       
       // Отправляем через эндпоинт бота
@@ -88,8 +77,6 @@ export class AppService {
         phone,
         type: 'phone-only'
       });
-
-      console.log('✅ Заявка (только телефон) успешно обработана');
       
       return {
         success: true,
@@ -97,7 +84,6 @@ export class AppService {
         applicationId,
       };
     } catch (error) {
-      console.error('❌ Ошибка отправки номера:', error.message);
       return {
         success: false,
         message: 'Ошибка при отправке номера',
@@ -108,13 +94,11 @@ export class AppService {
   private async saveToFirebase(id: string, data: any): Promise<void> {
     const url = `${this.FIREBASE_URL}/applications/${id}.json`;
     await axios.put(url, data);
-    console.log('🔥 Firebase: данные сохранены');
   }
 
   private async savePhoneToFirebase(id: string, data: any): Promise<void> {
     const url = `${this.FIREBASE_URL}/phone-requests/${id}.json`;
     await axios.put(url, data);
-    console.log('🔥 Firebase: телефон сохранен');
   }
 
   private async sendToGoogleSheets(name: string, phone: string, comment: string): Promise<void> {
@@ -123,8 +107,6 @@ export class AppService {
       params.append('name', name || '');
       params.append('phone', phone);
       params.append('comment', comment || '');
-
-      console.log('📊 Отправка в Google Sheets:', params.toString());
 
       const response = await axios.post(
         this.GOOGLE_SHEETS_URL,
@@ -136,9 +118,7 @@ export class AppService {
         }
       );
       
-      console.log('📊 Google Sheets ответ:', response.data);
     } catch (error) {
-      console.error('❌ Ошибка Google Sheets:', error.message);
       throw error;
     }
   }
@@ -167,9 +147,6 @@ export class AppService {
         };
       }
 
-      console.log('📤 Отправка заявки в бот:', applicationData);
-      console.log('📤 URL бота:', this.BOT_API_URL);
-
       const response = await axios.post(
         this.BOT_API_URL,
         applicationData,
@@ -181,15 +158,12 @@ export class AppService {
         }
       );
       
-      console.log('🤖 Ответ от бота:', response.data);
     } catch (error) {
-      console.error('❌ Ошибка отправки в бот:', error.message);
       
       // Пробуем отправить напрямую главному админу как запасной вариант
       try {
         await this.sendToTelegramDirect(data);
       } catch (fallbackError) {
-        console.error('❌ Ошибка запасной отправки:', fallbackError.message);
       }
     }
   }
@@ -210,17 +184,13 @@ export class AppService {
 <b>ФИО:</b> ${data.name}
 <b>Телефон:</b> <code>${data.phone}</code>
 <b>Комментарий:</b> ${data.comment || 'Не указан'}
-<b>Дата/Время:</b> ${dateNow}, ${timeNow}
-
-⚠️ Отправлено только главному администратору (ошибка массовой рассылки)`;
+<b>Дата/Время:</b> ${dateNow}, ${timeNow}`;
     } else {
       message = `🔥 <b>НОВАЯ ЗАЯВКА С САЙТА</b> 🔥
 
 <b>Телефон:</b> <code>${data.phone}</code>
 <b>Тип:</b> Только телефон
-<b>Дата/Время:</b> ${dateNow}, ${timeNow}
-
-⚠️ Отправлено только главному администратору (ошибка массовой рассылки)`;
+<b>Дата/Время:</b> ${dateNow}, ${timeNow}`;
     }
 
     const response = await axios.post(
@@ -232,6 +202,5 @@ export class AppService {
       }
     );
     
-    console.log('📢 Запасная отправка в Telegram:', response.data);
   }
 }

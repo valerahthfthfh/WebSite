@@ -30,7 +30,7 @@ function Footer() {
 
   // Новая функция для прокрутки к блоку ContactForm (Контакты)
   const scrollToContact = () => {
-    const contactSection = document.getElementById('contact-form-section');
+    const contactSection = document.getElementById('a');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' });
     }
