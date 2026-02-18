@@ -28,6 +28,14 @@ function Footer() {
     }
   };
 
+  // Новая функция для прокрутки к блоку ContactForm (Контакты)
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact-form-section');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer>
       <div className="footer">
@@ -79,7 +87,8 @@ function Footer() {
         <div className="footer-content">
           <h4>Помощь</h4>
           <ul>
-            <li><a href="#">Контакты</a></li>
+            {/* Добавлен обработчик клика для Контактов */}
+            <li><a href="#" onClick={(e) => { e.preventDefault(); scrollToContact(); }}>Контакты</a></li>
             <li><a href="https://github.com/valerahthfthfh/WebSite"
               target="_blank" 
               rel="noopener noreferrer">Разработчики</a></li>
