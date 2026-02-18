@@ -82,6 +82,10 @@
   flex-shrink: 0;
 }
 
+.ol img {
+  width: 25px;
+}
+
 .features {
   display: flex;
   flex-direction: column;

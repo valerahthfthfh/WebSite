@@ -6,6 +6,7 @@ import Heating from '../../shared/icon/Отопление.png'
 import Washing from '../../shared/icon/Стиралка.png'
 import Fridge from '../../shared/icon/Холодильник.png'
 import Hat from '../../shared/icon/шляпа.png'
+import Arr from '../../shared/icon/arr.png'
 function Service() {
   return (
     <div class="container" id="services-section">
@@ -22,9 +23,18 @@ function Service() {
                 <div class="space-gg">
                     
                 </div>
-                    <div className='button-sec'>
-                        <a href="#" class="cta-button-sec">Отправить заявку </a>
-                        <div className='ol'>→</div>
+                    <div className='button-sec' onClick={() => {
+                      const mainForm = document.querySelector('.login-form');
+                      if (mainForm) {
+                        mainForm.scrollIntoView({ behavior: 'smooth' });
+                        mainForm.classList.add('form-highlighted');
+                        setTimeout(() => {
+                          mainForm.classList.remove('form-highlighted');
+                        }, 2000);
+                      }
+                    }} style={{cursor: 'pointer'}}>
+                      <span className="cta-button-sec">Отправить заявку</span>
+                      <span className='ol'><img src={Arr} alt="Arr" /></span>
                     </div>
                     
                 </div>

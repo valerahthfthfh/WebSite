@@ -11,6 +11,9 @@ import Data from './layout/сardSlider/Data';
 import Footer from './layout/footer/Footer';
 import SectionGlobal from './layout/sectionGlobal/SectionGlobal';
 import ContactForm from './layout/contactForm/ContactForm';
+import Arr from './shared/icon/arr.png';
+// Импортируем только CookieBanner (он сам содержит YandexMetrika)
+import CookieBanner from './components/CookieBanner';
 
 function App() {
   const [showButton, setShowButton] = useState(false);
@@ -72,9 +75,8 @@ function App() {
   };
 
   return (
-      <div className="App">     
-      <Header 
-      />
+    <div className="App">     
+      <Header />
       <MainForm />
       <InfiniteSlider />
       <Why />
@@ -85,12 +87,17 @@ function App() {
       <ContactForm />
       <SectionGlobal />
       <Footer />
+      
+      {/* Кнопка "Наверх" */}
       <button
         className={`to-top-btn ${showButton ? 'show' : ''}`}
         onClick={scrollToTop}
       >
-        ↑
+        <img src={Arr} alt="arr" />
       </button>
+
+      {/* Cookie баннер с Яндекс.Метрикой */}
+      <CookieBanner />
     </div>
   );
 }

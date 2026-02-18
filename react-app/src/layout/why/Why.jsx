@@ -5,6 +5,20 @@ import House from '../../shared/img/дома.png';
 import Tool from '../../shared/img/инструменты.png';
 
 function Why() {
+  // Функция для прокрутки к форме и её подсветки
+  const scrollToFormAndHighlight = (e) => {
+    e.preventDefault(); // Предотвращаем переход по ссылке
+    
+    const mainForm = document.querySelector('.login-form');
+    if (mainForm) {
+      mainForm.scrollIntoView({ behavior: 'smooth' });
+      mainForm.classList.add('form-highlighted');
+      setTimeout(() => {
+        mainForm.classList.remove('form-highlighted');
+      }, 2000);
+    }
+  };
+
   return (
     <div className="container" id="why-section">
         <main className="main-content">
@@ -16,7 +30,7 @@ function Why() {
 
                 <div className="hero-button">
                     <div className="space"></div>
-                    <a href="#" className="cta-button">Узнать подробнее</a>
+                    <a href="#" className="cta-button" onClick={scrollToFormAndHighlight}>Узнать подробнее</a>
                 </div>
                 
                 <div className="features">
@@ -28,7 +42,7 @@ function Why() {
                             <h4>Профессиональный ремонт</h4>
                             <p>Ремонт под ключ от проекта до отделки. Надёжные материалы, чёткие сроки. Создадим для вас современное и уютное пространство.</p>
                             <div className="feature-link">
-                                <a href="">Заказать</a>
+                                <a href="#" onClick={scrollToFormAndHighlight}>Заказать</a>
                                 <p>→</p>
                             </div>
                         </div>
@@ -42,7 +56,7 @@ function Why() {
                             <h4>Сантехнические работы</h4>
                             <p>Безопасный монтаж газового оборудования. Установка и ремонт всей сантехники. Гарантия на работы.</p>
                             <div className="feature-link">
-                                <a href="">Заказать</a>
+                                <a href="#" onClick={scrollToFormAndHighlight}>Заказать</a>
                                 <p>→</p>
                             </div>
                         </div>
@@ -56,7 +70,7 @@ function Why() {
                             <h4>Электромонтаж и электрика</h4>
                             <p>Полный спектр услуг: от розетки до проводки. Устраняем неисправности, обеспечиваем безопасность и надёжность.</p>
                             <div className="feature-link">
-                                <a href="">Заказать</a>
+                                <a href="#" onClick={scrollToFormAndHighlight}>Заказать</a>
                                 <p>→</p>
                             </div>
                         </div>

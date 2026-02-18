@@ -351,6 +351,11 @@ body {
   background: #e63e38;
 }
 
+.to-top-btn img {
+  width: 25px;
+  transform: rotate(-90deg);
+}
+
 /* Состояния загрузки */
 button.loading,
 button:disabled {
