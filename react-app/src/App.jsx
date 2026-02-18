@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Добавляем импорты для роутинга
 import './App.css';
 import Header from '../src/layout/header/header';
 import MainForm from '../src/layout/form/main-form';
@@ -11,14 +12,68 @@ import Data from './layout/сardSlider/Data';
 import Footer from './layout/footer/Footer';
 import SectionGlobal from './layout/sectionGlobal/SectionGlobal';
 import ContactForm from './layout/contactForm/ContactForm';
+import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy'; // Импортируем компонент политики
 import Arr from './shared/icon/arr.png';
 // Импортируем только CookieBanner (он сам содержит YandexMetrika)
 import CookieBanner from './components/CookieBanner';
 
-function App() {
+// Создаем компонент для главной страницы
+function HomePage() {
   const [showButton, setShowButton] = useState(false);
 
-  // Jivo Widget
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    handleScroll();
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  return (
+    <>
+      <Header />
+      <MainForm />
+      <InfiniteSlider />
+      <Why />
+      <TimeBlock />
+      <Service />
+      <Data />
+      <MapKit />
+      <ContactForm />
+      <SectionGlobal />
+      <Footer />
+      
+      {/* Кнопка "Наверх" */}
+      <button
+        className={`to-top-btn ${showButton ? 'show' : ''}`}
+        onClick={scrollToTop}
+      >
+        <img src={Arr} alt="arr" />
+      </button>
+
+      {/* Cookie баннер с Яндекс.Метрикой */}
+      <CookieBanner />
+    </>
+  );
+}
+
+function App() {
+  // Jivo Widget (выносим на уровень App, чтобы он был доступен на всех страницах)
   useEffect(() => {
     const widget_id = 'NhrSDE7n5m';
     const d = document;
@@ -51,54 +106,15 @@ function App() {
     };
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setShowButton(true);
-      } else {
-        setShowButton(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    
-    handleScroll();
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
   return (
-    <div className="App">     
-      <Header />
-      <MainForm />
-      <InfiniteSlider />
-      <Why />
-      <TimeBlock />
-      <Service />
-      <Data />
-      <MapKit />
-      <ContactForm />
-      <SectionGlobal />
-      <Footer />
-      
-      {/* Кнопка "Наверх" */}
-      <button
-        className={`to-top-btn ${showButton ? 'show' : ''}`}
-        onClick={scrollToTop}
-      >
-        <img src={Arr} alt="arr" />
-      </button>
-
-      {/* Cookie баннер с Яндекс.Метрикой */}
-      <CookieBanner />
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

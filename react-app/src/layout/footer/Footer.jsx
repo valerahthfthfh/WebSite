@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Импортируем Link вместо useNavigate
 import './Footer.css';
 import Av1 from '../../shared/icon/av1.png';
 import Tel1 from '../../shared/icon/tel1.png';
@@ -28,9 +29,9 @@ function Footer() {
     }
   };
 
-  // Новая функция для прокрутки к блоку ContactForm (Контакты)
+  // Функция для прокрутки к блоку ContactForm (Контакты)
   const scrollToContact = () => {
-    const contactSection = document.getElementById('a');
+    const contactSection = document.getElementById('contact-form-section');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' });
     }
@@ -49,7 +50,6 @@ function Footer() {
               target="_blank" 
               rel="noopener noreferrer"
               className="footer-social-link"
-              title="Открыть Avito в новой вкладке"
             >
               <img src={Av1} alt="Avito" className='footer-social-icon'/>
             </a>
@@ -59,7 +59,6 @@ function Footer() {
               target="_blank" 
               rel="noopener noreferrer"
               className="footer-social-link"
-              title="Открыть Telegram в новой вкладке"
             >
               <img src={Tel1} alt="Telegram" className='footer-social-icon'/>
             </a>
@@ -78,21 +77,21 @@ function Footer() {
         <div className="footer-content">
           <h4>Информация</h4>
           <ul>
-            <li><a href="#">Пользовательское соглашение</a></li>
-            <li><a href="#">Обработка персональных данных</a></li>
-            <li><a href="#">Cookie</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>Пользовательское соглашение</a></li>
+            {/* Используем Link для навигации без перезагрузки страницы */}
+            <li><Link to="/privacy-policy">Обработка персональных данных</Link></li>
+            <li><Link to="/privacy-policy">Cooke</Link></li>
           </ul>
         </div>
 
         <div className="footer-content">
           <h4>Помощь</h4>
           <ul>
-            {/* Добавлен обработчик клика для Контактов */}
             <li><a href="#" onClick={(e) => { e.preventDefault(); scrollToContact(); }}>Контакты</a></li>
             <li><a href="https://github.com/valerahthfthfh/WebSite"
               target="_blank" 
               rel="noopener noreferrer">Разработчики</a></li>
-            <li><a href="#">FAQ</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>FAQ</a></li>
           </ul>
         </div>
       </div>
