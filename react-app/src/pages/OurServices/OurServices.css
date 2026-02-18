@@ -1,0 +1,295 @@
+/* Базовые стили */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    font-size: 14px;
+    min-height: 100vh;
+    color: #2F3542;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    display: flex;
+    padding: 30px 20px;
+    justify-content: center;
+}
+
+/* Стили кнопки "Назад" */
+.go-back {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    background-color: #FD4943;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(253, 73, 67, 0.3);
+    z-index: 1000;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    border: none;
+}
+
+.go-back:hover {
+    background-color: #e03d37;
+    transform: translateX(-3px);
+    box-shadow: 0 6px 15px rgba(253, 73, 67, 0.4);
+}
+
+.go-back:active {
+    transform: translateX(0);
+}
+
+/* Контейнер для услуг */
+.services-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Заголовки страницы */
+.page-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-weight: 700;
+
+}
+
+.page-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: #7f8c8d;
+    font-weight: 300;
+
+}
+
+/* Сетка для пирамиды */
+.services-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* Верхний ряд - 3 карточки */
+.top-row {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* Нижний ряд - 2 карточки по центру */
+.bottom-row {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* Карточка услуги */
+.service-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #7D8694;
+    width: 300px;
+    min-width: 280px;
+    max-width: 350px;
+    flex: 0 1 auto;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-color: #FD4943;
+}
+
+/* Контейнер для фото */
+.service-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background-color: #eaeef2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #FD4943;
+}
+
+.service-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+    display: block;
+}
+
+.service-card:hover .service-image img {
+    transform: scale(1.05);
+}
+
+/* Контент карточки */
+.service-content {
+    padding: 20px;
+    flex: 1;
+}
+
+.service-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2F3542;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    min-height: 70px;
+}
+
+/* Футер карточки */
+.service-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    padding: 0 20px 20px 20px;
+    border-top: 1px solid #7D8694;
+    padding-top: 15px;
+}
+
+.service-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #FD4943;
+    text-align: center;
+
+}
+
+/* Кнопка "Записаться" */
+.btn {
+    display: inline-block;
+    background-color: #FD4943;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(253, 73, 67, 0.2);
+    width: fit-content;
+}
+
+.btn:hover {
+    background-color: #e03d37;
+    transform: translateX(-2px);
+    box-shadow: 0 6px 15px rgba(253, 73, 67, 0.3);
+}
+
+.btn:active {
+    transform: translateX(0);
+}
+
+/* Адаптивность для планшетов */
+@media (max-width: 768px) {
+    .go-back {
+        top: 15px;
+        left: 15px;
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .top-row, .bottom-row {
+        gap: 20px;
+    }
+    
+    .service-card {
+        width: 280px;
+    }
+}
+
+/* Адаптивность для телефонов */
+@media (max-width: 640px) {
+    .wrapper {
+        padding: 60px 10px 15px 10px;
+    }
+    
+    .go-back {
+        top: 10px;
+        left: 10px;
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+    
+    .services-container {
+        padding: 20px 10px;
+    }
+    
+    .page-title {
+        font-size: 1.8rem;
+    }
+    
+    .top-row, .bottom-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .service-card {
+        width: 100%;
+        max-width: 350px;
+    }
+    
+    .service-footer {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .service-title {
+        min-height: auto;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 400px) {
+    .service-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}

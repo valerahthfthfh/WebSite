@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Импортируем Link вместо useNavigate
+import { Link } from 'react-router-dom';
 import './Footer.css';
 import Av1 from '../../shared/icon/av1.png';
 import Tel1 from '../../shared/icon/tel1.png';
@@ -31,7 +31,7 @@ function Footer() {
 
   // Функция для прокрутки к блоку ContactForm (Контакты)
   const scrollToContact = () => {
-    const contactSection = document.getElementById('contact-form-section');
+    const contactSection = document.getElementById('a');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' });
     }
@@ -77,7 +77,7 @@ function Footer() {
         <div className="footer-content">
           <h4>Информация</h4>
           <ul>
-            <li><a href="#" onClick={(e) => e.preventDefault()}>Пользовательское соглашение</a></li>
+            <li><Link to="/terms-of-service">Пользовательское соглашение</Link></li>
             <li><Link to="/privacy-policy">Обработка персональных данных</Link></li>
             <li><Link to="/privacy-policy">Cooke</Link></li>
           </ul>
@@ -90,7 +90,7 @@ function Footer() {
             <li><a href="https://github.com/valerahthfthfh/WebSite"
               target="_blank" 
               rel="noopener noreferrer">Разработчики</a></li>
-            <li><a href="#" onClick={(e) => e.preventDefault()}>FAQ</a></li>
+            <li><Link to="/faq">FAQ</Link></li>
           </ul>
         </div>
       </div>

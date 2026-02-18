@@ -1,13 +1,22 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Why.css';
 import Lightning from '../../shared/img/молния.png';
 import House from '../../shared/img/дома.png';
 import Tool from '../../shared/img/инструменты.png';
 
 function Why() {
-  // Функция для прокрутки к форме и её подсветки
+  const navigate = useNavigate();
+
+  // Функция для перехода на страницу услуг
+  const goToServicesPage = (e) => {
+    e.preventDefault();
+    navigate('/services');
+  };
+
+  // Функция для прокрутки к форме и её подсветки (оставляем для кнопок "Заказать")
   const scrollToFormAndHighlight = (e) => {
-    e.preventDefault(); // Предотвращаем переход по ссылке
+    e.preventDefault();
     
     const mainForm = document.querySelector('.login-form');
     if (mainForm) {
@@ -30,7 +39,7 @@ function Why() {
 
                 <div className="hero-button">
                     <div className="space"></div>
-                    <a href="#" className="cta-button" onClick={scrollToFormAndHighlight}>Узнать подробнее</a>
+                    <a href="#" className="cta-button" onClick={goToServicesPage}>Узнать подробнее</a>
                 </div>
                 
                 <div className="features">
