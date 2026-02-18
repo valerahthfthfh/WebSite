@@ -122,6 +122,7 @@ function OurServices() {
                 </div>
                 <div className="service-footer">
                   <span className="service-price">Цена договорная</span>
+                  
                 </div>
               </div>
             </div>
