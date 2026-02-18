@@ -44,7 +44,7 @@ function ContactForm() {
   };
 
   return (
-    <div className='contact-form-main' id="contact-form-section"> {/* ← Добавь id сюда */}
+    <div className='contact-form-main' id="contact-form-section"> 
       <div className='input-number-phone'>
         <div className="hero-text">
           <h1 className="hero-logo">Котл<span>OFF</span> service</h1>

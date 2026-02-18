@@ -4,12 +4,17 @@
   gap: 0;
   max-width: 100%;
   padding: 0;
+  background-color: white;
+}
+
+#contact-form-section {
+  background-color: white;
 }
 
 .input-number-phone {
   width: 100%;
   padding: 24px 16px 40px;
-  background: white;
+  background-color: white;
 }
 
 .input-number-phone .hero-text {
