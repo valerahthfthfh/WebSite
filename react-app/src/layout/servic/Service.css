@@ -78,7 +78,7 @@
   justify-content: center;
   color: white;
   font-size: 24px;
-  transform: rotate(-20deg);
+  transform: rotate(0deg);
   flex-shrink: 0;
 }
 
