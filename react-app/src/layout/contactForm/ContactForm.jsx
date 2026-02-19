@@ -7,6 +7,22 @@ function ContactForm() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [phone, setPhone] = useState('');
 
+  // Функция валидации - только цифры и знак +
+  const validatePhoneInput = (value) => {
+    // Разрешаем только цифры и знак +
+    const regex = /^[0-9+]*$/;
+    return regex.test(value);
+  };
+
+  const handlePhoneChange = (e) => {
+    const inputValue = e.target.value;
+    
+    // Проверяем валидность ввода
+    if (validatePhoneInput(inputValue)) {
+      setPhone(inputValue);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -14,6 +30,13 @@ function ContactForm() {
 
     if (!phone.trim()) {
       alert('Введите номер телефона');
+      setIsLoading(false);
+      return;
+    }
+
+    // Дополнительная проверка: номер должен содержать хотя бы одну цифру
+    if (!/\d/.test(phone)) {
+      alert('Введите корректный номер телефона (должен содержать цифры)');
       setIsLoading(false);
       return;
     }
@@ -43,6 +66,15 @@ function ContactForm() {
     }
   };
 
+  // Обработчик вставки из буфера обмена
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const pastedText = e.clipboardData.getData('text');
+    // Очищаем вставляемый текст от всех символов кроме цифр и +
+    const cleanedText = pastedText.replace(/[^0-9+]/g, '');
+    setPhone(cleanedText);
+  };
+
   return (
     <div className='contact-form-main' id="contact-form-section"> 
       <div className='input-number-phone'>
@@ -63,9 +95,14 @@ function ContactForm() {
             type="tel" 
             placeholder="+7 (___) __-__-__"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={handlePhoneChange}
+            onPaste={handlePaste}
             disabled={isLoading}
             required
+            // Добавляем атрибуты для мобильной клавиатуры
+            inputMode="numeric"
+            pattern="[0-9+]*"
+            title="Можно использовать только цифры и знак +"
           />
           <button type="submit" disabled={isLoading}>
             {isLoading ? 'Отправка...' : 'Отправить'}

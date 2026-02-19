@@ -7,6 +7,54 @@ function MainForm() {
   
   const BACKEND_URL = 'https://kotloff-backend.onrender.com/send-request';
 
+  // Функция валидации для телефона - только цифры и знак +
+  const validatePhoneInput = (value) => {
+    const regex = /^[0-9+]*$/;
+    return regex.test(value);
+  };
+
+  const handlePhoneChange = (e) => {
+    const inputValue = e.target.value;
+    
+    if (validatePhoneInput(inputValue)) {
+      // Если нужно, можно обновлять состояние телефона здесь
+      // Но так как мы используем неуправляемую форму, просто возвращаем true/false
+      return true;
+    }
+    return false;
+  };
+
+  // Обработчик для поля телефона
+  const handlePhoneKeyDown = (e) => {
+    const key = e.key;
+    
+    // Разрешаем навигационные клавиши
+    const allowedKeys = [
+      'Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight', 
+      'ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter'
+    ];
+    
+    if (allowedKeys.includes(key)) {
+      return; // Разрешаем эти клавиши
+    }
+    
+    // Запрещаем ввод любых символов кроме цифр и +
+    if (!/^[0-9+]$/.test(key)) {
+      e.preventDefault();
+    }
+  };
+
+  // Обработчик вставки для поля телефона
+  const handlePhonePaste = (e) => {
+    e.preventDefault();
+    const pastedText = e.clipboardData.getData('text');
+    // Очищаем от всех символов кроме цифр и +
+    const cleanedText = pastedText.replace(/[^0-9+]/g, '');
+    
+    // Вставляем очищенный текст
+    document.execCommand('insertText', false, cleanedText);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -19,6 +67,13 @@ function MainForm() {
 
     if (!name || !phone) {
       alert('Пожалуйста, заполните имя и телефон');
+      setIsLoading(false);
+      return;
+    }
+
+    // Проверка, что телефон содержит хотя бы одну цифру
+    if (!/\d/.test(phone)) {
+      alert('Введите корректный номер телефона (должен содержать цифры)');
       setIsLoading(false);
       return;
     }
@@ -127,7 +182,14 @@ function MainForm() {
                 id="phone"
                 autoComplete="off"
                 placeholder="+7 (___) __-__-__"
+                onKeyDown={handlePhoneKeyDown}
+                onPaste={handlePhonePaste}
+                onChange={(e) => handlePhoneChange(e)}
                 required
+                // Добавляем атрибуты для мобильной клавиатуры
+                inputMode="numeric"
+                pattern="[0-9+]*"
+                title="Можно использовать только цифры и знак +"
               />
             </div>
             <div>
