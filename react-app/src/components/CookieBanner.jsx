@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './CookieBanner.css';
 import YandexMetrika from './YandexMetrika';
+import { Link } from 'react-router-dom';
 
 function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
