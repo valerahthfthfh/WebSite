@@ -1,4 +1,3 @@
-// components/CardSlider.jsx
 import React, { useState, useEffect } from 'react';
 import './CardSlider.css';
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
@@ -9,7 +8,6 @@ const CardSlider = ({ testimonials }) => {
   const [touchEnd, setTouchEnd] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // Минимальная дистанция для свайпа
   const minSwipeDistance = 50;
 
   const handlePrev = () => {
@@ -30,7 +28,6 @@ const CardSlider = ({ testimonials }) => {
     setTimeout(() => setIsAnimating(false), 300);
   };
 
-  // Обработчики для touch events
   const onTouchStart = (e) => {
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
@@ -56,7 +53,6 @@ const CardSlider = ({ testimonials }) => {
     }
   };
 
-  // Автопрокрутка
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
@@ -65,7 +61,6 @@ const CardSlider = ({ testimonials }) => {
     return () => clearInterval(interval);
   }, [currentIndex]);
 
-  // Рендеринг звезд рейтинга
   const renderStars = (rating) => {
     return [...Array(5)].map((_, index) => (
       <Star 
@@ -87,7 +82,6 @@ const CardSlider = ({ testimonials }) => {
           onTouchEnd={onTouchEnd}
         >
           {testimonials.map((testimonial, index) => {
-            // Вычисляем позицию карточки
             let position = 'next';
             if (index === currentIndex) {
               position = 'active';
