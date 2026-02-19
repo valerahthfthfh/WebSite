@@ -69,7 +69,7 @@ function Footer() {
           <h4>Компания</h4>
           <ul>
             <li><a href="#" onClick={(e) => { e.preventDefault(); scrollToWhy(); }}>О нас</a></li>
-            <li><a href="#" onClick={(e) => { e.preventDefault(); scrollToService(); }}>Наши работы</a></li>
+            <li><a href="#" onClick={(e) => { e.preventDefault(); scrollToService(); }}>Наши услуги</a></li>
             <li><a href="#" onClick={(e) => { e.preventDefault(); scrollToData(); }}>Отзывы</a></li>
           </ul>
         </div>

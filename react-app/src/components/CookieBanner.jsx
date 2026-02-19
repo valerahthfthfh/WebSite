@@ -44,7 +44,7 @@ function CookieBanner() {
               <span className="cookie-icon">🍪</span>
               Мы используем файлы cookie, чтобы улучшить вашу работу с сайтом. 
               Продолжая просмотр, вы соглашаетесь с нашей{' '}
-              <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">политикой конфиденциальности</a>.
+              <Link to="/privacy-policy">политикой конфиденциальности</Link>
             </p>
             <button className="cookie-button" onClick={acceptCookies}>
               Принять
